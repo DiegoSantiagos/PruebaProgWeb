@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.carrusel {
+    padding-top: 20px;
+    background-color: grey;
+}
+
+#flecha-carru-iz,
+#flecha-carru-der {
+    padding: 10px 10px;
+}
+
+#flecha-carru-der {
+    justify-content: right;
+}
+
+#flecha-carru-iz {
+    justify-content: left;
+}

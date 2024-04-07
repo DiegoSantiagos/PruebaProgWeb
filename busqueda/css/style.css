@@ -19,8 +19,25 @@ main {
     color: rgb(182, 182, 182);
 }
 
-section {
+.mai {
     margin: 0px auto 0px auto;
     max-width: 1280px;
     margin: 10px;
+}
+
+.aba {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px;
+    background-color: rgb(99, 99, 99);
+    border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+
+    }
+
 }
