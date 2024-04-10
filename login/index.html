@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda</title>
-    <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -45,6 +44,7 @@
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                         </li>
@@ -56,57 +56,32 @@
                 </div>
             </div>
         </nav>
+        <h1> </h1>
     </header>
     <main>
-        <!-- en el div estan la barra lateral  -->
-        <section class="iz">
-            <h1>Filtros</h1>
-        </section>
-        <!-- en el section estan las cartas  -->
-        <section class="der">
-            <div class="arr">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <h1>Productos</h1>
-                        </div>
-                    </div>
+        <div class="container-fluid mt-4 align-items-center">
+            <div class="row">
+                <h1 class="text-center">HolaComoEstas</h1>
+                <div class="col12 col-md-6 offset-md-3 mt-md-4">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" class="form-control">
+                </div>
+                <div class="col12 col-md-6 offset-md-3">
+                    <label for="nombre">apellido</label>
+                    <input type="text" id="apellido" class="form-control">
                 </div>
             </div>
-            <div class="mai">
-                <div class="row row-cols-1 row-cols-md-3 g-4">
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="source/peru.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a longer card with supporting text below as a natural
-                                    lead-in
-                                    to additional content. This content is a little bit longer.</p>
-                            </div>
-                        </div>
-                    </div>
+            <div class="row mt-4">
+                <div class="col-3 col-md-3 offset-md-3">Opciones</div>
+                <div class="col-9 col-md-3">
+                    <button class="btn btn-danger float-end">Guardar</button>
                 </div>
             </div>
-            <div class="aba">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-end">
-                        <li class="page-item disabled">
-                            <a class="page-link">Previous</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </section>
+        </div>
     </main>
 </body>
 <footer>
+
 </footer>
 
 </html>
