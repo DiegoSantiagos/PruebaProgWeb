@@ -20,9 +20,8 @@ main {
 }
 
 .mai {
-    margin: 0px auto 0px auto;
     max-width: 1280px;
-    margin: 10px;
+    margin: auto 10px;
 }
 
 .aba {
@@ -36,8 +35,7 @@ main {
 
 @media (max-width: 768px) {
     main {
+        display: flex;
         flex-direction: column;
-
     }
-
 }
