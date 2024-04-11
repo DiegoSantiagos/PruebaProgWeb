@@ -33,11 +33,48 @@ main {
     border-radius: 5px;
 }
 
+.arr {
+    padding: 10px;
+    background-color: rgb(29, 29, 29);
+    color: rgb(212, 212, 212);
+    border-radius: 5px;
+    margin: 5px;
+
+}
+
+.visible {
+
+    display: none !important;
+}
+
+
+
 @media (max-width: 768px) {
     main {
         display: flex;
         flex-direction: column;
     }
 
-    .iz {}
+    .arr {
+        margin: 0;
+    }
+
+    .fil {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin: 10px auto;
+    }
+
+    .visible {
+        display: block !important;
+    }
+
+}
+
+@media (min-width: 1024px) {
+    .iz {
+        width: 200px;
+    }
 }
