@@ -57,6 +57,15 @@ main {
 
 }
 
+.filtros {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(44, 44, 44);
+
+}
+
 
 @media (max-width: 768px) {
     main {
@@ -80,6 +89,12 @@ main {
         display: block !important;
     }
 
+}
+
+@media (max-width: 768px) {
+    .filtros {
+        display: none;
+    }
 }
 
 @media (min-width: 1024px) {
