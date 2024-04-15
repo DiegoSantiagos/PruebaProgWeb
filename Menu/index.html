@@ -26,9 +26,6 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="../busqueda/index.html">Link</a>
                         </li>
                         <li class="nav-item dropdown">
@@ -51,17 +48,45 @@
                         <li class="nav-item">
                             <form class="d-flex" role="search">
                                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-success" type="submit">Search</button>
+                                <button class="btn btn-outline-success" type="submit"><a
+                                        style="text-decoration: none; color:rgb(0, 143, 0);"
+                                        href="../busqueda/index.html">Search</a></button>
                             </form>
                         </li>
-
                     </ul>
-                    <a class="btn" href="../Login/index.html">Login</a>
-
+                    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#login"
+                        data-bs-whatever="@mdo">LogIn</button>
+                    <div class="modal fade login" id="login" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" style="color: rgb(182, 182, 182);">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">New message to @mdo</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="md-3 mt-3">
+                                            <label for="correo">Correo</label>
+                                            <input type="email" id="correo" class="form-control" required>
+                                        </div>
+                                        <div class="md-3 mt-3">
+                                            <label for="inputPassword5" class="form-label">Contraseña</label>
+                                            <input type="password" id="inputPassword5" class="form-control"
+                                                aria-describedby="passwordHelpBlock">
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <a class="btn btn-secondary" href="../Login/index.html">Registrarse</a>
+                                    <button type="button" class="btn btn-primary">iniciar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>
-        <h1> </h1>
     </header>
     <main>
         <section class="carrusel">

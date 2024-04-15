@@ -52,6 +52,10 @@ main {
     text-decoration: none;
 }
 
+.modal-footer {
+    justify-content: space-between !important;
+
+}
 
 
 @media (max-width: 768px) {

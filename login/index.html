@@ -13,8 +13,6 @@
 </head>
 
 <body>
-
-
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
             <div class="container-fluid">
@@ -26,9 +24,6 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="../busqueda/index.html">Link</a>
                         </li>
@@ -52,45 +47,107 @@
                         <li class="nav-item">
                             <form class="d-flex" role="search">
                                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-success" type="submit">Search</button>
+                                <button class="btn btn-outline-success" type="submit"><a
+                                        style="text-decoration: none; color:rgb(0, 143, 0);"
+                                        href="../busqueda/index.html">Search</a></button>
                             </form>
                         </li>
-
                     </ul>
-                    <a class="btn" href="../Login/index.html">Login</a>
-
-                </div>
-            </div>
-        </nav>
-        <h1> </h1>
-    </header>
-    <main>
-        <div class="container-fluid mt-4 align-items-center">
-            <div class="row">
-                <h1 class="text-center">iniciar secion</h1>
-                <div class="col12 col-md-6 offset-md-3 mt-md-4">
-                    <label for="correo">correo</label>
-                    <input type="text" id="correo" class="form-control">
-                </div>
-                <div class="col12 col-md-6 offset-md-3">
-                    <label for="inputPassword5" class="form-label">Password</label>
-                    <input type="password" id="inputPassword5" class="form-control"
-                        aria-describedby="passwordHelpBlock">
-                    <div id="passwordHelpBlock" class="form-text">
-                        Tu contraseña debe tener entre 8-20 characteres.
+                    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#login"
+                        data-bs-whatever="@mdo">LogIn</button>
+                    <div class="modal fade login" id="login" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" style="color: rgb(182, 182, 182);">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">New message to @mdo</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="md-3 mt-3">
+                                            <label for="correo">Correo</label>
+                                            <input type="email" id="correo" class="form-control" required>
+                                        </div>
+                                        <div class="md-3 mt-3">
+                                            <label for="inputPassword5" class="form-label">Contraseña</label>
+                                            <input type="password" id="inputPassword5" class="form-control"
+                                                aria-describedby="passwordHelpBlock">
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <a class="btn btn-secondary" href="../Login/index.html">Registrarse</a>
+                                    <button type="button" class="btn btn-primary">iniciar</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row mt-4">
-                <div class="col-3 col-md-3 offset-md-3">Opciones</div>
-                <div class="col-9 col-md-3">
-                    <a href="../Menu/index.html">
-                        <button class="btn btn-danger float-end">Guardar</button>
-
-                    </a>
+        </nav>
+    </header>
+    <main>
+        <section class="container-fluid mt-4 align-items-center">
+            <div class="row">
+                <div class="col-12 col-md-6 offset-md-3">
+                    <label for="correo">Correo</label>
+                    <input type="email" id="correo" class="form-control" required>
+                </div>
+                <div class="col-12 col-md-6 offset-md-3">
+                    <label for="inputPassword5" class="form-label">Contraseña</label>
+                    <input type="password" id="inputPassword5" class="form-control"
+                        aria-describedby="passwordHelpBlock">
+                    <div id="passwordHelpBlock" class="form-text">
+                        Tu contraseña debe tener entre 8 y 20 caracteres.
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 offset-md-3">
+                    <label for="rut">Rut</label>
+                    <input type="text" id="rut" class="form-control" required>
+                </div>
+                <div class="col-12 col-md-6 offset-md-3">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" class="form-control" required>
+                </div>
+                <div class="col-12 col-md-6 offset-md-3">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" id="apellido" class="form-control" required>
+                </div>
+                <div class="col-12 col-md-6 offset-md-3">
+                    <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                    <input type="date" id="fechaNacimiento" class="form-control" required>
+                </div>
+                <div class="col-12 col-md-6 offset-md-3">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" id="telefono" class="form-control" required>
+                </div>
+                <div class="col-12 col-md-6 offset-md-3">
+                    <label for="region">Región</label>
+                    <select id="region" class="form-select" required>
+                        <option value="">Selecciona una región</option>
+                        <option value="1">Región 1</option>
+                        <option value="2">Región 2</option>
+                        <!-- Agrega más opciones según las regiones que necesites -->
+                    </select>
+                </div>
+                <div class="col-12 col-md-6 offset-md-3">
+                    <label for="nivelEducacional">Nivel Educacional</label>
+                    <select id="nivelEducacional" class="form-select" required>
+                        <option value="">Selecciona un nivel educacional</option>
+                        <option value="doctor">Doctor</option>
+                        <option value="magister">Magíster</option>
+                        <option value="profesional">Profesional</option>
+                        <!-- Agrega más opciones según los niveles educacionales que necesites -->
+                    </select>
                 </div>
             </div>
-        </div>
+            <div class="row mt-4">
+                <div class="col-7 col-md-3 offset-md-3">
+                    <button type="submit" class="btn btn-danger float-end">Guardar</button>
+                </div>
+            </div>
+        </section>
     </main>
 </body>
 <footer>
