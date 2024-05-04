@@ -10,7 +10,7 @@ main {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    padding-top: 20px;
+    padding-block-start: 20px;
 }
 
 .iz {
@@ -19,9 +19,34 @@ main {
     color: rgb(182, 182, 182);
 }
 
+.tipo {
+    display: flex;
+    justify-content: space-around;
+    align-items: self-start;
+    margin: 10px;
+}
+
+
+
+.ul-filtro {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border: none;
+    list-style: none;
+}
+
 .mai {
     max-width: 1280px;
     margin: auto 10px;
+}
+
+.li-filtro {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    /* background-color: red; */
+
 }
 
 .aba {
