@@ -14,6 +14,9 @@ main {
 }
 
 .iz {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
     background-color: rgb(44, 44, 44);
     padding: 10px;
     color: rgb(182, 182, 182);
@@ -77,6 +80,13 @@ main {
     text-decoration: none;
 }
 
+.cartas img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border: 1px solid rgb(44, 44, 44);
+}
+
 .modal-footer {
     justify-content: space-between !important;
 
@@ -112,6 +122,11 @@ main {
 
     .visible {
         display: block !important;
+    }
+
+    .cartas img {
+        height: auto;
+
     }
 
 }
