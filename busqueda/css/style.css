@@ -49,6 +49,7 @@ main {
     justify-content: flex-start;
     border: none;
     list-style: none;
+    padding: 0;
 }
 
 .mai {

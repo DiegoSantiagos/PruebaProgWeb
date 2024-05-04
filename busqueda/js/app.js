@@ -4,6 +4,8 @@ async function obtenerTasaDeCambio() {
     return datos.rates.USD;
 }
 
+
+
 async function actualizarPrecio() {
     const elementosPrecio = document.querySelectorAll('#precio');
     const tasaDeCambio = await obtenerTasaDeCambio();
@@ -14,3 +16,4 @@ async function actualizarPrecio() {
         elementoPrecio.textContent = precioEnUSD.toFixed(2);
     });
 }
+
