@@ -13,6 +13,13 @@ main {
     padding-block-start: 20px;
 }
 
+.alin {
+    display: flex;
+    flex-direction: row;
+
+
+}
+
 .iz {
     display: flex;
     flex-direction: column;
@@ -29,7 +36,12 @@ main {
     margin: 10px;
 }
 
+.sc-prec {
+    display: flex;
+    flex-direction: row;
 
+
+}
 
 .ul-filtro {
     display: flex;

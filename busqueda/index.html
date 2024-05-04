@@ -87,20 +87,21 @@
                     <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
                     <label class="btn btn-outline-primary" for="btncheck3">Laptop</label>
                 </div>
-                <a class="btn btn-outline-success" onclick="convertirPesosADolares()">convertir</a>
                 <label>
                     <ul class="ul-filtro">
-                        <li>
-                            <input type="radio" name="rd-filt" value="1">
-                            <label for="rd-pr" class="precio"> Hasta $10000</label>
+                        <li class="alin">
+                            <input type="radio" name="rd-filt" value="1">Hasta $
+                            <label for="rd-pr" id="precio"> 10000</label>
                         </li>
                         <li>
                             <input type="radio" name="rd-filt" value="2">
-                            <label for="rd-pr" class="precio"> $10000 -$40000</label>
+                            <label for="rd-pr" class="alin">
+                                $<p id="precio">10000</p> - $<p id="precio">40000</p>
+                            </label>
                         </li>
                         <li>
                             <input type="radio" name="rd-filt" value="3">
-                            <label for="rd-pr" class="precio"> $40000 -$60000</label>
+                            <label for="rd-pr" id="precio"> $40000 -$60000</label>
                         </li>
                         <li>
                             <input type="radio" name="rd-filt" value="4">
@@ -211,6 +212,7 @@
                     <div class="row">
                         <div class="col">
                             <h1>Productos</h1>
+                            <a class="btn btn-outline-success" onclick="actualizarPrecio()">convertir</a>
                         </div>
                     </div>
                 </div>
@@ -223,7 +225,9 @@
                                 <img src="../source/laptop1.jpeg" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
-                                    <h6 class="card-text precio">$60000</h6>
+                                    <div class="sc-prec">
+                                        $<p class="card-text " id="precio">60000</p>
+                                    </div>
                                     <p class="card-text">This is a longer card with supporting text below as a natural
                                         lead-in
                                         to additional content. This content is a little bit longer.</p>
@@ -237,7 +241,9 @@
                                 <img src="../source/laptop2.jpeg" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
-                                    <h6 class="card-text precio">$60000</h6>
+                                    <div class="sc-prec">
+                                        $<p class="card-text precio">60000</p>
+                                    </div>
                                     <p class="card-text">This is a longer card with supporting text below as a natural
                                         lead-in
                                         to additional content. This content is a little bit longer.</p>
@@ -251,7 +257,9 @@
                                 <img src="../source/laptop3.jpeg" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
-                                    <h6 class="card-text precio">$60000</h6>
+                                    <div class="sc-prec">
+                                        $<p class="card-text precio">60000</p>
+                                    </div>
                                     <p class="card-text">This is a longer card with supporting text below as a natural
                                         lead-in
                                         to additional content. This content is a little bit longer.</p>
@@ -265,7 +273,9 @@
                                 <img src="../source/laptop4.jpeg" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
-                                    <h6 class="card-text precio">$60000</h6>
+                                    <div class="sc-prec">
+                                        $<p class="card-text precio">60000</p>
+                                    </div>
                                     <p class="card-text">This is a longer card with supporting text below as a natural
                                         lead-in
                                         to additional content. This content is a little bit longer.</p>
@@ -279,7 +289,9 @@
                                 <img src="../source/laptop5.jpeg" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
-                                    <h6 class="card-text precio">$60000</h6>
+                                    <div class="sc-prec">
+                                        $<p class="card-text" id="precio">60000</p>
+                                    </div>
                                     <p class="card-text">This is a longer card with supporting text below as a natural
                                         lead-in
                                         to additional content. This content is a little bit longer.</p>
@@ -293,7 +305,9 @@
                                 <img src="../source/peru.jpg" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
-                                    <h6 class="card-text precio">$60000</h6>
+                                    <div class="sc-prec">
+                                        $<p class="card-text precio">60000</p>
+                                    </div>
                                     <p class="card-text">This is a longer card with supporting text below as a natural
                                         lead-in
                                         to additional content. This content is a little bit longer.</p>

@@ -1,22 +1,16 @@
-function convertirPesosADolares() {
-    const elementos = document.getElementsByClassName('precio');
+async function obtenerTasaDeCambio() {
+    const respuesta = await fetch('https://api.exchangerate-api.com/v4/latest/CLP');
+    const datos = await respuesta.json();
+    return datos.rates.USD;
+}
 
-    for (let i = 0; i < elementos.length; i++) {
-        const labelElement = elementos[i];
-        const texto = labelElement.textContent;
+async function actualizarPrecio() {
+    const elementosPrecio = document.querySelectorAll('#precio');
+    const tasaDeCambio = await obtenerTasaDeCambio();
 
-        // Extraer el precio de la cadena de texto utilizando una expresión regular
-        const precio = texto.match(/\d+(\.\d+)?/)[0];
-
-        const pesos = parseFloat(precio);
-        const dollars = pesos / 20;
-
-        // Reemplazar solo el precio en el texto utilizando la función replace y la expresión regular
-        const nuevoTexto = texto.replace(/\d+(\.\d+)?/, dollars.toFixed(2));
-
-        // Reemplazar solo la parte del precio en el texto original
-        const textoModificado = texto.replace(precio, nuevoTexto);
-
-        labelElement.textContent = textoModificado;
-    }
+    elementosPrecio.forEach(async (elementoPrecio) => {
+        const precioEnCLP = Number(elementoPrecio.textContent);
+        const precioEnUSD = precioEnCLP * tasaDeCambio;
+        elementoPrecio.textContent = precioEnUSD.toFixed(2);
+    });
 }
