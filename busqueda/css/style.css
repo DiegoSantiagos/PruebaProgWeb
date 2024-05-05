@@ -31,9 +31,9 @@ main {
 
 .tipo {
     display: flex;
-    justify-content: space-around;
-    align-items: self-start;
+    flex-direction: column;
     margin: 10px;
+    width: 70px;
 }
 
 .sc-prec {
@@ -80,7 +80,6 @@ main {
     color: rgb(212, 212, 212);
     border-radius: 5px;
     margin: 5px;
-
 }
 
 .visible {
@@ -102,7 +101,6 @@ main {
 
 .modal-footer {
     justify-content: space-between !important;
-
 }
 
 .filtros {
@@ -111,7 +109,6 @@ main {
     justify-content: center;
     align-items: center;
     background-color: rgb(44, 44, 44);
-
 }
 
 
