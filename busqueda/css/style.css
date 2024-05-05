@@ -15,10 +15,8 @@ main {
 
 .alin {
     display: flex;
-    flex-direction: row;
-
-
 }
+
 
 .iz {
     display: flex;
@@ -36,6 +34,7 @@ main {
     width: 70px;
 }
 
+
 .sc-prec {
     display: flex;
     flex-direction: row;
@@ -52,17 +51,16 @@ main {
     padding: 0;
 }
 
+
 .mai {
     max-width: 1280px;
     margin: auto 10px;
 }
 
 .li-filtro {
-    list-style: none;
     display: flex;
-    flex-direction: column;
-    /* background-color: red; */
-
+    flex-direction: row;
+    padding-top: 10px;
 }
 
 .aba {
@@ -109,6 +107,7 @@ main {
     justify-content: center;
     align-items: center;
     background-color: rgb(44, 44, 44);
+    border: 10px solid rgb(44, 44, 44);
 }
 
 
@@ -117,6 +116,13 @@ main {
         display: flex;
         flex-direction: column;
     }
+
+    .tipo {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
 
     .arr {
         margin: 0;

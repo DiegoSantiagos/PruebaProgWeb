@@ -87,32 +87,6 @@
                     <button class="btn-f" onclick="filterSelection('pc')"> Pc</button>
                     <button class="btn-f" onclick="filterSelection('raton')"> Raton</button>
                 </div>
-
-                <ul class="ul-filtro">
-                    <li class="alin">
-                        <input type="radio" name="rd-filt" value="1">Hasta $
-                        <label for="rd-pr" id="precio">10000</label>
-                    </li>
-                    <li>
-                        <input type="radio" name="rd-filt" value="2">
-                        <label for="rd-pr" class="alin">
-                            $<p id="precio">10000</p> - $<p id="precio">40000</p>
-                        </label>
-                    </li>
-                    <li>
-                        <input type="radio" name="rd-filt" value="3">
-                        <label for="rd-pr" class="alin">
-                            $<p id="precio">40000</p> - $<p id="precio">60000</p>
-                        </label>
-                    </li>
-                    <li>
-                        <input type="radio" name="rd-filt" value="4">
-                        <label for="rd-pr" class="alin">
-                            $<p id="precio">60000</p> - $<p id="precio">100000</p>
-                        </label>
-                    </li>
-                </ul>
-
             </div>
             <button type="button" class="visible btn btn-primary" data-bs-toggle="modal"
                 data-bs-target="#exampleModalFullscreen">filtros</button>
@@ -137,68 +111,15 @@
                                     <div id="flush-collapseOne" class="accordion-collapse collapse"
                                         data-bs-parent="#accordionFlushExample">
                                         <div class="accordion-body">
-                                            <div class="btn-group" role="group"
-                                                aria-label="Basic checkbox toggle button group">
-                                                <input type="checkbox" class="btn-check" id="btncheck1"
-                                                    autocomplete="off">
-                                                <label class="btn btn-outline-primary" for="btncheck1">uno</label>
-                                                <input type="checkbox" class="btn-check" id="btncheck2"
-                                                    autocomplete="off">
-                                                <label class="btn btn-outline-primary" for="btncheck2">dos</label>
-                                                <input type="checkbox" class="btn-check" id="btncheck3"
-                                                    autocomplete="off">
-                                                <label class="btn btn-outline-primary" for="btncheck3">tres</label>
-                                                <input type="checkbox" class="btn-check" id="btncheck4"
-                                                    autocomplete="off">
-                                                <label class="btn btn-outline-primary" for="btncheck4">cuatro</label>
+                                            <div class="tipo" id="myBtnContainer">
+                                                <button class="btn-f" onclick="filterSelection('all')">
+                                                    Todo</button>
+                                                <button class="btn-f" onclick="filterSelection('laptop')">
+                                                    Laptop</button>
+                                                <button class="btn-f" onclick="filterSelection('pc')"> Pc</button>
+                                                <button class="btn-f" onclick="filterSelection('raton')"> Raton</button>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo"
-                                            aria-expanded="false" aria-controls="flush-collapseTwo">
-                                            Precio
-                                        </button>
-                                    </h2>
-                                    <div id="flush-collapseTwo" class="accordion-collapse collapse"
-                                        data-bs-parent="#accordionFlushExample">
-                                        <ul>
-                                            <li><label><input type="checkbox">Hasta
-                                                    $10.000</label>
-                                            </li>
-                                            </li>
-                                            <li><label><input type="checkbox">
-                                                    $10.000 -$40.000</label>
-                                            </li>
-                                            </li>
-                                            <li><label><input type="checkbox">
-                                                    $40.000- $60.000</label>
-                                            </li>
-                                            <li><label><input type="checkbox">
-                                                    $60.000 -$100.000</label>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#flush-collapseThree"
-                                            aria-expanded="false" aria-controls="flush-collapseThree">
-                                            Accordion Item #3
-                                        </button>
-                                    </h2>
-                                    <div id="flush-collapseThree" class="accordion-collapse collapse"
-                                        data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body">Placeholder content for this accordion, which is
-                                            intended to demonstrate the <code>.accordion-flush</code> class. This is the
-                                            third item's accordion body. Nothing more exciting happening here in terms
-                                            of content, but just filling up the space to make it look, at least at first
-                                            glance, a bit more representative of how this would look in a real-world
-                                            application.</div>
                                     </div>
                                 </div>
                             </div>
