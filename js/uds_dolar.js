@@ -31,14 +31,3 @@ async function actualizarPrecio() {
         elementoPrecio.textContent = precioActual.toFixed(2);
     });
 }
-// async function actualizarPrecio() {
-//     const elementosPrecio = document.querySelectorAll('#precio');
-//     const tasaDeCambio = await obtenerTasaDeCambio();
-
-//     elementosPrecio.forEach(async (elementoPrecio) => {
-//         const precioEnCLP = Number(elementoPrecio.textContent);
-//         const precioEnUSD = precioEnCLP * tasaDeCambio;
-//         elementoPrecio.textContent = precioEnUSD.toFixed(2);
-//     });
-// }
-
