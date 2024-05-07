@@ -4,15 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda</title>
+    <title>Registro</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+    <script src="js/validacion.js"></script>
 </head>
 
-<body>
+<body data-bs-theme="dark">
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
             <div class="container-fluid">
@@ -25,24 +27,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="../busqueda/index.html">Link</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
+                            <a class="nav-link" href="../busqueda/index.html">Catalogo</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                            <a class="nav-link" href="../carrito/index.html">Carrito</a>
                         </li>
                         <li class="nav-item">
                             <form class="d-flex" role="search">
@@ -53,100 +41,61 @@
                             </form>
                         </li>
                     </ul>
-                    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#login"
-                        data-bs-whatever="@mdo">LogIn</button>
-                    <div class="modal fade login" id="login" tabindex="-1" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog" style="color: rgb(182, 182, 182);">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">New message to @mdo</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form>
-                                        <div class="md-3 mt-3">
-                                            <label for="correo">Correo</label>
-                                            <input type="email" id="correo" class="form-control" required>
-                                        </div>
-                                        <div class="md-3 mt-3">
-                                            <label for="inputPassword5" class="form-label">Contraseña</label>
-                                            <input type="password" id="inputPassword5" class="form-control"
-                                                aria-describedby="passwordHelpBlock">
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <a class="btn btn-secondary" href="../Login/index.html">Registrarse</a>
-                                    <button type="button" class="btn btn-primary">iniciar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </nav>
     </header>
     <main>
         <section class="container-fluid mt-4 align-items-center">
-            <div class="row">
-                <div class="col-12 col-md-6 offset-md-3">
-                    <label for="correo">Correo</label>
-                    <input type="email" id="correo" class="form-control" required>
-                </div>
-                <div class="col-12 col-md-6 offset-md-3">
-                    <label for="inputPassword5" class="form-label">Contraseña</label>
-                    <input type="password" id="inputPassword5" class="form-control"
-                        aria-describedby="passwordHelpBlock">
-                    <div id="passwordHelpBlock" class="form-text">
-                        Tu contraseña debe tener entre 8 y 20 caracteres.
+            <form>
+                <div class="row">
+                    <div class="col-12 col-md-6 offset-md-3">
+                        <label for="correo">Correo</label>
+                        <input type="text" id="correo" class="form-control txtEma">
+                    </div>
+                    <div class="col-12 col-md-6 offset-md-3">
+                        <label for="inputPassword5" class="form-label">Contraseña</label>
+                        <input type="password" id="inputPassword5" class="form-control txtCla"
+                            aria-describedby="passwordHelpBlock">
+                        <div id="passwordHelpBlock" class="form-text">
+                            Tu contraseña debe tener entre 8 y 20 caracteres.
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 offset-md-3">
+                        <label for="rut">Rut</label>
+                        <input type="text" id="rut" class="form-control txtRun">
+                    </div>
+                    <div class="col-12 col-md-6 offset-md-3">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" class="form-control txtNom">
+                    </div>
+                    <div class="col-12 col-md-6 offset-md-3">
+                        <label for="apellido">Apellido</label>
+                        <input type="text" id="apellido" class="form-control txtApe">
+                    </div>
+                    <div class="col-12 col-md-6 offset-md-3">
+                        <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                        <input type="date" id="fechaNacimiento" class="form-control txtFec">
+                    </div>
+                    <div class="col-12 col-md-6 offset-md-3">
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" id="telefono" class="form-control txtFon">
+                    </div>
+                    <div class="col-12 col-md-6 offset-md-3">
+                        <label for="region">Región</label>
+                        <select id="region" class="form-select">
+                            <option value="">Selecciona una región</option>
+                            <option value="1">Metropolitana</option>
+                            <option value="2"> </option>
+                        </select>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 offset-md-3">
-                    <label for="rut">Rut</label>
-                    <input type="text" id="rut" class="form-control" required>
+                <div class="row mt-4">
+                    <div class="col-7 col-md-3 offset-md-3">
+                        <button type="submit" class="btnGuar btn btn-danger float-end">Guardar</button>
+                    </div>
                 </div>
-                <div class="col-12 col-md-6 offset-md-3">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre" class="form-control" required>
-                </div>
-                <div class="col-12 col-md-6 offset-md-3">
-                    <label for="apellido">Apellido</label>
-                    <input type="text" id="apellido" class="form-control" required>
-                </div>
-                <div class="col-12 col-md-6 offset-md-3">
-                    <label for="fechaNacimiento">Fecha de Nacimiento</label>
-                    <input type="date" id="fechaNacimiento" class="form-control" required>
-                </div>
-                <div class="col-12 col-md-6 offset-md-3">
-                    <label for="telefono">Teléfono</label>
-                    <input type="tel" id="telefono" class="form-control" required>
-                </div>
-                <div class="col-12 col-md-6 offset-md-3">
-                    <label for="region">Región</label>
-                    <select id="region" class="form-select" required>
-                        <option value="">Selecciona una región</option>
-                        <option value="1">Región 1</option>
-                        <option value="2">Región 2</option>
-                        <!-- Agrega más opciones según las regiones que necesites -->
-                    </select>
-                </div>
-                <div class="col-12 col-md-6 offset-md-3">
-                    <label for="nivelEducacional">Nivel Educacional</label>
-                    <select id="nivelEducacional" class="form-select" required>
-                        <option value="">Selecciona un nivel educacional</option>
-                        <option value="doctor">Doctor</option>
-                        <option value="magister">Magíster</option>
-                        <option value="profesional">Profesional</option>
-                        <!-- Agrega más opciones según los niveles educacionales que necesites -->
-                    </select>
-                </div>
-            </div>
-            <div class="row mt-4">
-                <div class="col-7 col-md-3 offset-md-3">
-                    <button type="submit" class="btn btn-danger float-end">Guardar</button>
-                </div>
-            </div>
+            </form>
         </section>
     </main>
 </body>

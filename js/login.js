@@ -1,7 +1,4 @@
 $(function () {
-    $('.btnLimpiar').click(function () {
-        $('.txtEmail, .txtClave').val('');
-    });
     $('.btnLog').click(function () {
         if ($('.txtEmail').val() == '') {
             alert('No especificó el correo');

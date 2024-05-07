@@ -38,8 +38,7 @@ main {
 .sc-prec {
     display: flex;
     flex-direction: row;
-
-
+    text-decoration: solid
 }
 
 .ul-filtro {
