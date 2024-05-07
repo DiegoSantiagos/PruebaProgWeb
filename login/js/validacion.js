@@ -18,6 +18,16 @@ $(function () {
             alert('No especificó el Run');
         } else if (!/^[0-9]+-[0-9kK]{1}$/.test($('.txtRun').val())) {
             alert('El formato del Run no es válido');
+        } else if ($('.txtNom').val() == '') {
+            alert('No especificó el nombre');
+        } else if ($('.txtApe').val() == '') {
+            alert('No especificó el apellido');
+        } else if ($('.txtFec').val() == '') {
+            alert('No especificó la fecha de nacimiento');
+        } else if ($('.txtFon').val() == '') {
+            alert('No especificó el teléfono');
+        } else if (!/^[0-9]+$/.test($('.txtFon').val())) {
+            alert('El teléfono solo puede contener números');
         } else {
             // enivar datos
             alert('Los datos se enviaron correctamente');

@@ -4,20 +4,28 @@
     box-sizing: border-box;
 }
 
-.carrusel {
-    padding-top: 20px;
-    background-color: grey;
+main {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 300px;
 }
 
-#flecha-carru-iz,
-#flecha-carru-der {
-    padding: 10px 10px;
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    max-height: 1020px;
 }
 
-#flecha-carru-der {
-    justify-content: right;
-}
+@media screen and (max-width: 768px) {
+    main {
+        padding: 0px;
+        min-width: auto;
+    }
 
-#flecha-carru-iz {
-    justify-content: left;
+    section {
+        padding: 0px;
+    }
+
 }
