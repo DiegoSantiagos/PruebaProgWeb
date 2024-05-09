@@ -38,3 +38,9 @@
     text-decoration: none;
     color: black;
 }
+
+@media screen and (max-width: 768px) {
+    .cartas img {
+        height: 300px;
+    }
+}

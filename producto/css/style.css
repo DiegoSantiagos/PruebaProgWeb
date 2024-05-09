@@ -4,41 +4,37 @@
     box-sizing: inherit;
 }
 
-body {
-    background-color: grey !important;
-}
-
 .arribac {
-    background-color: aqua;
     display: flex;
     align-items: center;
     max-width: 1712px;
     margin: 0px 48px;
 }
 
+.precio {
+    display: flex;
+    align-items: center;
+    font-size: 40px;
+}
+
+.precio p {
+    font-size: 38px;
+}
+
 .imag {
     width: auto;
     height: 600px;
-
-
 }
-
 
 .datos {
     display: flex;
     flex-direction: column;
     justify-content: left;
-    background-color: rgb(255, 0, 0);
 }
 
 .prod {
     display: flex;
     justify-content: space-between;
-
-
-    background-color: rgb(0, 128, 0);
-
-
 }
 
 .pago {
@@ -52,8 +48,6 @@ body {
 .precio {
     display: flex;
     align-items: center;
-
-
 }
 
 @media (min-width: 768px) {

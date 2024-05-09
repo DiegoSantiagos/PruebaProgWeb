@@ -16,13 +16,14 @@
     <script src="../js/uds_dolar.js"></script>
     <script src="js/Filtro.js"></script>
     <script src="../js/login.js"></script>
+    <script src="../js/carrito.js"></script>
 </head>
 
 <body>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="../Menu/index.html">HolaComoEstas</a>
+                <a class="navbar-brand" href="../index.html">HolaComoEstas</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -39,8 +40,8 @@
                         <li class="nav-item">
                             <form class="d-flex" role="search">
                                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-success" type="submit"><a
-                                        href="../busqueda/index.html">Search</a></button>
+                                <button class="btn btn-outline-success" type="submit"
+                                    href="../busqueda/index.html">Search</button>
                             </form>
                         </li>
                     </ul>
@@ -145,7 +146,7 @@
             </div>
             <div class="mai">
                 <div class="row row-cols-1 row-cols-md-4 g-4 cont-filt">
-                    <div class="col laptop filterDiv show">
+                    <div class="col laptop filterDiv show " id="acernitro5">
                         <div class="card h-100">
                             <a href="../producto/index.html" class="cartas">
                                 <img src="../source/laptop1.jpeg" class="card-img-top" alt="...">
@@ -159,14 +160,16 @@
                                         to additional content. This content is a little bit longer.</p>
                                 </div>
                             </a>
+                            <button type="button" class="btn carri btn-primary" onclick="carrito(1)">añadir al
+                                carrito</button>
                         </div>
                     </div>
-                    <div class="col laptop filterDiv show">
+                    <div class="col laptop filterDiv show " id="HpStream">
                         <div class="card h-100">
                             <a href="../producto/index.html" class="cartas">
                                 <img src="../source/laptop2.jpeg" class="card-img-top" alt="...">
                                 <div class="card-body">
-                                    <h5 class="card-title">Laptop</h5>
+                                    <h5 class="card-title">Hp Stream</h5>
                                     <div class="sc-prec">
                                         $<p class="card-text" id="precio">600000</p>
                                     </div>
@@ -175,14 +178,16 @@
                                         to additional content. This content is a little bit longer.</p>
                                 </div>
                             </a>
+                            <button type="button" class="btn carri btn-primary" onclick="carrito(2)">añadir al
+                                carrito</button>
                         </div>
                     </div>
-                    <div class="col laptop filterDiv show">
+                    <div class="col laptop filterDiv show " id="TagiTop">
                         <div class="card h-100">
                             <a href="../producto/index.html" class="cartas">
                                 <img src="../source/laptop3.jpeg" class="card-img-top" alt="...">
                                 <div class="card-body">
-                                    <h5 class="card-title">Laptop</h5>
+                                    <h5 class="card-title">TagiTop</h5>
                                     <div class="sc-prec">
                                         $<p class="card-text" id="precio">60000</p>
                                     </div>
@@ -191,9 +196,11 @@
                                         to additional content. This content is a little bit longer.</p>
                                 </div>
                             </a>
+                            <button type="button" class="btn carri btn-primary" onclick="carrito(3)">añadir al
+                                carrito</button>
                         </div>
                     </div>
-                    <div class="col laptop filterDiv show">
+                    <div class="col laptop filterDiv show " id="victus">
                         <div class="card h-100">
                             <a href="../producto/index.html" class="cartas">
                                 <img src="../source/laptop4.jpeg" class="card-img-top" alt="...">
@@ -207,9 +214,11 @@
                                         to additional content. This content is a little bit longer.</p>
                                 </div>
                             </a>
+                            <button type="button" class="btn carri btn-primary" onclick="carrito(4)">añadir al
+                                carrito</button>
                         </div>
                     </div>
-                    <div class="col laptop filterDiv show">
+                    <div class="col laptop filterDiv show " id="tufgaming">
                         <div class="card h-100">
                             <a href="../producto/index.html" class="cartas">
                                 <img src="../source/laptop5.jpeg" class="card-img-top" alt="...">
@@ -223,14 +232,16 @@
                                         to additional content. This content is a little bit longer.</p>
                                 </div>
                             </a>
+                            <button type="button" class="btn carri btn-primary" onclick="carrito(5)">añadir al
+                                carrito</button>
                         </div>
                     </div>
-                    <div class="col pc filterDiv show">
+                    <div class="col pc filterDiv show " id="pcgamer">
                         <div class="card h-100">
                             <a href="../producto/index.html" class="cartas">
                                 <img src="../source/pc1.jpeg" class="card-img-top" alt="...">
                                 <div class="card-body">
-                                    <h5 class="card-title">Pc Escritorio</h5>
+                                    <h5 class="card-title">Pc Gamer</h5>
                                     <div class="sc-prec">
                                         $<p class="card-text" id="precio">60000</p>
                                     </div>
@@ -239,9 +250,11 @@
                                         to additional content. This content is a little bit longer.</p>
                                 </div>
                             </a>
+                            <button type="button" class="btn carri btn-primary" onclick="carrito(6)">añadir al
+                                carrito</button>
                         </div>
                     </div>
-                    <div class="col pc filterDiv show">
+                    <div class="col pc filterDiv show " id="pcescritorio">
                         <div class="card h-100">
                             <a href="../producto/index.html" class="cartas">
                                 <img src="../source/pc2.jpeg" class="card-img-top" alt="...">
@@ -255,14 +268,16 @@
                                         to additional content. This content is a little bit longer.</p>
                                 </div>
                             </a>
+                            <button type="button" class="btn carri btn-primary" onclick="carrito(7)">añadir al
+                                carrito</button>
                         </div>
                     </div>
-                    <div class="col raton filterDiv show">
+                    <div class="col raton filterDiv show " id="logg305">
                         <div class="card h-100">
                             <a href="../producto/index.html" class="cartas">
                                 <img src="../source/raton1.jpeg" class="card-img-top" alt="...">
                                 <div class="card-body">
-                                    <h5 class="card-title">Logitech G395</h5>
+                                    <h5 class="card-title">Logitech G305</h5>
                                     <div class="sc-prec">
                                         $<p class="card-text" id="precio">60000</p>
                                     </div>
@@ -271,9 +286,11 @@
                                         to additional content. This content is a little bit longer.</p>
                                 </div>
                             </a>
+                            <button type="button" class="btn carri btn-primary" onclick="carrito(8)">añadir al
+                                carrito</button>
                         </div>
                     </div>
-                    <div class="col raton filterDiv show">
+                    <div class="col raton filterDiv show " id="ratongenerico">
                         <div class="card h-100">
                             <a href="../producto/index.html" class="cartas">
                                 <img src="../source/raton2.jpeg" class="card-img-top" alt="...">
@@ -287,6 +304,8 @@
                                         to additional content. This content is a little bit longer.</p>
                                 </div>
                             </a>
+                            <button type="button" class="btn carri btn-primary" onclick="carrito(9)">añadir al
+                                carrito</button>
                         </div>
                     </div>
                 </div>
