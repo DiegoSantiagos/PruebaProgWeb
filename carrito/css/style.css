@@ -4,13 +4,6 @@
     box-sizing: border-box;
 }
 
-/* main {
-    display: flex;
-    flex-direction: column;
-    background-color: rgb(44, 42, 51);
-    max-width: 1024px;
-} */
-
 main {
     background-color: rgb(66, 66, 66);
     display: flex;
@@ -18,7 +11,6 @@ main {
     justify-content: center;
     padding-block-start: 20px;
 }
-
 
 .productos {
     display: flex;
@@ -39,8 +31,5 @@ main {
         min-width: auto;
     }
 
-    .productos {
-        max-height: 100%;
-    }
 
 }
