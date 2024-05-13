@@ -4,18 +4,33 @@
     box-sizing: border-box;
 }
 
-main {
+/* main {
     display: flex;
     flex-direction: column;
-    padding: 0px 300px;
+    background-color: rgb(44, 42, 51);
+    max-width: 1024px;
+} */
+
+main {
+    background-color: rgb(66, 66, 66);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block-start: 20px;
 }
 
-section {
+
+.productos {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: start;
     max-height: 1020px;
+}
+
+.sc-prec {
+    display: flex;
+    flex-direction: row;
 }
 
 @media screen and (max-width: 768px) {
@@ -24,8 +39,8 @@ section {
         min-width: auto;
     }
 
-    section {
-        padding: 0px;
+    .productos {
+        max-height: 100%;
     }
 
 }
