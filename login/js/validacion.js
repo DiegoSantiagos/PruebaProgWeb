@@ -1,6 +1,7 @@
 $(function () {
-    $('.btnLimpiar').click(function () {
-        $('.txtEma, .txtCla, txtRun').val('');
+    $('.btnLimp').click(function () {
+        $('.txtEma, .txtCla, txtRun, .txtNom, .txtApe, .txtFon, .region').val('');
+        $('.txtFec').val('dd-mm-aaaa');
     });
     $('.btnGuar').click(function () {
         //    Comprobar correo
@@ -18,6 +19,7 @@ $(function () {
             alert('No especificó el Run');
         } else if (!/^[0-9]+-[0-9kK]{1}$/.test($('.txtRun').val())) {
             alert('El formato del Run no es válido');
+            // Comprobar Nombre, Apellido, Fecha de nacimiento, Teléfono
         } else if ($('.txtNom').val() == '') {
             alert('No especificó el nombre');
         } else if ($('.txtApe').val() == '') {

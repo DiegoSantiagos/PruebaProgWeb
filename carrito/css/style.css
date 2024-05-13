@@ -16,8 +16,7 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: start;
-    max-height: 1020px;
+    align-items: center;
 }
 
 .sc-prec {
@@ -31,5 +30,6 @@ main {
         min-width: auto;
     }
 
-
-}
+    .productos {
+        max-height: 100%;
+    }
