@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>añadir producto</title>
+    <title>Registro</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -12,6 +12,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="js/validacion.js"></script>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body data-bs-theme="dark">
@@ -49,52 +50,31 @@
             <form>
                 <div class="row">
                     <div class="col-12 col-md-6 offset-md-3">
-                        <label for="correo">Correo</label>
-                        <input type="text" id="correo" class="form-control txtEma">
+                        <label for="producto">Nombre Del Producto</label>
+                        <input type="text" id="producto" class="form-control txtProd">
                     </div>
                     <div class="col-12 col-md-6 offset-md-3">
-                        <label for="inputPassword5" class="form-label">Contraseña</label>
-                        <input type="password" id="inputPassword5" class="form-control txtCla"
-                            aria-describedby="passwordHelpBlock">
-                        <div id="passwordHelpBlock" class="form-text">
-                            Tu contraseña debe tener entre 8 y 20 caracteres.
+                        <label for="desc" class="form-label">Descripcion</label>
+                        <input type="text" id="descripcion" class="form-control txtDesc">
+                    </div>
+                    <div class="col-12 col-md-6 offset-md-3">
+                        <label for="precio" class="form-label">Precio</label>
+                        <input type="number" id="precio" class="form-control txtPrec">
+                    </div>
+                    <div class="col-12 col-md-6 offset-md-3">
+                        <label for="stock" class="form-label">Stock</label>
+                        <input type="number" id="stock" class="form-control txtSto">
+                    </div>
+                    <div class="col-12 col-md-6 offset-md-3">
+                        <label for="imagenp" class="form-label">Imagen del producto</label>
+                        <input type="file" accept=".jpg , .jpeg .web" id="imagenp" class="form-control imgProd">
+                    </div>
+                    <div class="row mt-4">
+                        <div class="botonesGL">
+                            <button type="submit" class="btnLimp btn btn-danger float-end">Limpiar</button>
+                            <button type="submit" class="btnGuar btn btn-danger float-end">Guardar</button>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6 offset-md-3">
-                        <label for="rut">Rut</label>
-                        <input type="text" id="rut" class="form-control txtRun">
-                    </div>
-                    <div class="col-12 col-md-6 offset-md-3">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" id="nombre" class="form-control txtNom">
-                    </div>
-                    <div class="col-12 col-md-6 offset-md-3">
-                        <label for="apellido">Apellido</label>
-                        <input type="text" id="apellido" class="form-control txtApe">
-                    </div>
-                    <div class="col-12 col-md-6 offset-md-3">
-                        <label for="fechaNacimiento">Fecha de Nacimiento</label>
-                        <input type="date" id="fechaNacimiento" class="form-control txtFec">
-                    </div>
-                    <div class="col-12 col-md-6 offset-md-3">
-                        <label for="telefono">Teléfono</label>
-                        <input type="tel" id="telefono" class="form-control txtFon">
-                    </div>
-                    <div class="col-12 col-md-6 offset-md-3">
-                        <label for="region">Región</label>
-                        <select id="region" class="form-select">
-                            <option value="">Selecciona una región</option>
-                            <option value="1">Metropolitana</option>
-                            <option value="2"> </option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-7 col-md-3 offset-md-3">
-                        <button type="submit" class="btnGuar btn btn-danger float-end">Guardar</button>
-                        <button type="submit" class="btnLimp btn btn-danger float-end">Limpiar</button>
-                    </div>
-                </div>
             </form>
         </section>
     </main>
