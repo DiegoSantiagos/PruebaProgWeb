@@ -7,7 +7,7 @@
 .botonesGL {
     display: flex;
     justify-content: space-between;
-    margin: 10px 480px;
+    margin: 10px 530px;
     max-width: 960px;
 }
 

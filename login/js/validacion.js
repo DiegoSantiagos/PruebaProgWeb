@@ -1,10 +1,13 @@
 $(function () {
-    $('.btnLimp').click(function () {
-        $('.txtEma, .txtCla, txtRun, .txtNom, .txtApe, .txtFon, .region').val('');
+    $('.btnLimp').click(function (event) {
+        event.preventDefault(); // Evitar el envío del formulario
+        $('.txtEma, .txtCla, .txtRun, .txtNom, .txtApe, .txtFon, .region').val('');
         $('.txtFec').val('dd-mm-aaaa');
     });
-    $('.btnGuar').click(function () {
-        //    Comprobar correo
+    $('.btnGuar').click(function (event) {
+        event.preventDefault(); // Evitar el envío del formulario
+
+        // Comprobar correo
         if ($('.txtEma').val() == '') {
             alert('No especificó el correo');
         } else if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test($('.txtEma').val())) {
@@ -14,10 +17,10 @@ $(function () {
             alert('No especificó la clave');
         } else if (!/^[a-zA-Z0-9]+$/.test($('.txtCla').val())) {
             alert('La clave solo puede contener letras y números');
-            // comprobar Rut
+            // Comprobar Rut
         } else if ($('.txtRun').val() == '') {
             alert('No especificó el Run');
-        } else if (!/^[0-9]+-[0-9kK]{1}$/.test($('.txtRun').val())) {
+        } else if (!/^[0-9.]+[0-9kK-]{2}$/.test($('.txtRun').val())) {
             alert('El formato del Run no es válido');
             // Comprobar Nombre, Apellido, Fecha de nacimiento, Teléfono
         } else if ($('.txtNom').val() == '') {
@@ -31,7 +34,7 @@ $(function () {
         } else if (!/^[0-9]+$/.test($('.txtFon').val())) {
             alert('El teléfono solo puede contener números');
         } else {
-            // enivar datos
+            // Enviar datos
             alert('Los datos se enviaron correctamente');
         }
     });
