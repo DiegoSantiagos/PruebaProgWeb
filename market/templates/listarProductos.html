@@ -1,0 +1,25 @@
+{% block tituloPestana %} Listar Carrito Usuario {% endblock %}
+{% block tituloPrincipal %} Carrito {% endblock %}
+{% block mensaje    %}
+{% endblock %}
+{% block contenido  %}
+{% endblock %}
+{% block listado    %}
+
+    <table class="table table-responsive table-striped">
+        <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Descripcion</th>
+            <th>Foto</th>
+        </tr>
+    {% comment %} {% for usuario in usuarios  %}
+        <tr>
+            <td>{{usuario.Nombre}}</td>
+            <td>{{usuario.Precio}}</td>
+            <td>{{usuario.Descripcion}}</td>
+            <td><img src="{{usuario.foto.url}}" alt="Foto" width="100" height="100"></td>
+    {% endfor %}
+    </table> {% endcomment %}
+
+{% endblock %}
