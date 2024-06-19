@@ -11,3 +11,11 @@ def index(request):
 def listarProductos(request):
     context = {}
     return render(request, 'listarProductos.html', context)
+
+def listarCarrito(request):
+    context = {}
+    return render(request, 'listarCarrito.html', context)
+
+def anadirProducto(request ):
+    context = {}
+    return render(request, 'anadirProducto.html', context)

@@ -1,6 +1,14 @@
 from django.db import models
 
 # Create your models here.
+
+class Categoria(models.Model):
+    nombre = models.CharField(max_length=50)
+    descripcion = models.TextField()
+
+    def __str__(self):
+        return self.nombre + ' ' + self.descripcion
+
 class Productos(models.Model):
     nombre = models.CharField(max_length=50)
     precio = models.CharField(max_length=10)
@@ -8,6 +16,7 @@ class Productos(models.Model):
     descripcion = models.TextField()
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_modificacion = models.DateTimeField(auto_now=True)
+    Categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nombre + ' ' + self.precio + ' ' + str(self.fecha_creacion) + ' ' + str(self.fecha_modificacion)
@@ -91,3 +100,23 @@ class Favoritos(models.Model):
     def __str__(self):
         return self.producto.nombre + ' ' + self.usuario.nombre
 
+
+#* Productos 
+#? nombre - precio - imagen - descripcion - fecha_creacion
+#* Usuario
+#? nombre - apellidos - foto - email - fecha_nacimiento - fecha_cuanta
+#* Compras
+#? producto - usuario - fecha_compra - cantidad - total
+#* Carrito
+#? producto - usuario - fecha_agregado - cantidad
+#* Direccion
+#? usuario - direccion - ciudad - estado - pais - codigo_postal - fecha_modificacion
+#* MetodoPago
+#? usuario - nombre - numero - fecha_expiracion - cvv - fecha_modificacion
+#* Comentarios
+#? producto - usuario - comentario - fecha_creacion - fecha_modificacion
+#* Calificacion
+#? producto - usuario - calificacion
+#* Favoritos
+#? producto - usuario
+#! extension better comments
