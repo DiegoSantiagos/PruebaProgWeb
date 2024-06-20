@@ -18,13 +18,16 @@
         <th>Precio</th>
         <th>Descripcion</th>
         <th>Foto</th>
+        <th>Categoria</th>
     </tr>
-    {% for producto in productos %}
+    {% for producto in listadoProductos %}
     <tr>
         <td>{{ producto.Nombre }}</td>
         <td>{{ producto.Precio }}</td>
         <td>{{ producto.Descripcion }}</td>
-        <!-- <td><img src="{{ producto.foto.url }}" alt="Foto" width="100" height="100"></td> -->
+        <td><img src="{{ producto.foto.url }}" alt="Foto" width="100" height="100"></td>
+        <td>{{ producto.Categoria }}</td>
+
     </tr>
     {% endfor %}
 </table>

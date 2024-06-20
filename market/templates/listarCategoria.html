@@ -1,0 +1,40 @@
+{% extends "plantillaBase.html" %}
+{% block tituloPestana %} Listar Categorias {% endblock %}
+{% block tituloPrincipal %} Categoria {% endblock %}
+{% block mensaje    %}
+    {% if exito %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{exito}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+    {% if error %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{error}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+{% endblock %}
+{% block contenido  %}
+    <a href="{% url 'anadirCategoria' %}" class="btn btn-primary">Ingresar</a>
+{% endblock %}
+{% block listado    %}
+
+    <table class="table table-responsive table-striped">
+        <tr>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Eliminar</th>
+            <th>Editar</th>
+        </tr>
+    {% for categoria in listadoCategoria %}
+        <tr>
+            <td>{{categoria.nombre}}</td>
+            <td>{{categoria.descripcion}}</td>
+            <td><a href="{#% url 'eliminarCategoria' categoria.id %#}" class="btn btn-danger">Eliminar</a></td>
+            <td><a href="{#% url 'editarCategoria' categoria.id %#}" class="btn btn-warning">Editar</a></td>
+            
+    {% endfor %}
+    </table>
+
+{% endblock %}

@@ -100,23 +100,3 @@ class Favoritos(models.Model):
     def __str__(self):
         return self.producto.nombre + ' ' + self.usuario.nombre
 
-
-#* Productos 
-#? nombre - precio - imagen - descripcion - fecha_creacion
-#* Usuario
-#? nombre - apellidos - foto - email - fecha_nacimiento - fecha_cuanta
-#* Compras
-#? producto - usuario - fecha_compra - cantidad - total
-#* Carrito
-#? producto - usuario - fecha_agregado - cantidad
-#* Direccion
-#? usuario - direccion - ciudad - estado - pais - codigo_postal - fecha_modificacion
-#* MetodoPago
-#? usuario - nombre - numero - fecha_expiracion - cvv - fecha_modificacion
-#* Comentarios
-#? producto - usuario - comentario - fecha_creacion - fecha_modificacion
-#* Calificacion
-#? producto - usuario - calificacion
-#* Favoritos
-#? producto - usuario
-#! extension better comments
