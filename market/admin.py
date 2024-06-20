@@ -12,3 +12,4 @@ admin.site.register(Comentarios)
 admin.site.register(Calificacion)
 admin.site.register(Favoritos)
 admin.site.register(Categoria)
+

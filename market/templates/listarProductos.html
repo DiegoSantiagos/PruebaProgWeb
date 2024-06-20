@@ -9,6 +9,9 @@
 {% block mensaje %}
 {% endblock %}
 {% block contenido %}
+
+<a href="{% url 'anadirProducto' %}" class="btn btn-primary">Ingresar</a>
+
 {% endblock %}
 {% block listado %}
 
@@ -22,9 +25,9 @@
     </tr>
     {% for producto in listadoProductos %}
     <tr>
-        <td>{{ producto.Nombre }}</td>
-        <td>{{ producto.Precio }}</td>
-        <td>{{ producto.Descripcion }}</td>
+        <td>{{ producto.nombre }}</td>
+        <td>{{ producto.precio }}</td>
+        <td>{{ producto.descripcion }}</td>
         <td><img src="{{ producto.foto.url }}" alt="Foto" width="100" height="100"></td>
         <td>{{ producto.Categoria }}</td>
 

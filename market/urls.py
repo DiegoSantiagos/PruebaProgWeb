@@ -9,4 +9,5 @@ urlpatterns = [
     path('listarCategoria', views.listarCategoria, name='listarCategoria'),
     path('anadirProducto', views.anadirProducto, name='anadirProducto'),
     path('anadirCategoria', views.anadirCategoria, name='anadirCategoria'),
+    path('buscarCategoria/<int:pk>', views.buscarCategoria, name='buscarCategoria'),
 ]

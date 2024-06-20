@@ -4,11 +4,22 @@
 {% block js %} {% endblock %}
 {% block tituloPrincipal %} Productos {% endblock %}
 {% block mensaje %}
+{% if exito %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{exito}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+{% if error %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{error}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
 {% endblock %}
 {% block contenido %}
 <form action="{% url 'anadirProducto' %}" method="post">
     {% csrf_token %}
-    <input type="hidden" name="txtId" value="0{{id}}">
     <div class="row">
         <div class="col-12 col-md-2 offset-md-3">Nombre</div>
         <div class="col-12 col-md-5">
@@ -38,15 +49,16 @@
         <div class="col-12 col-md-2 offset-md-3">Categoria</div>
         <div class="col-12 col-md-5">
             <select name="cmbCategoria" class="form-control">
-                {% for categoria in listadoCategoria %}
-                    <option value="{{categoria.id}}" {% if categoria.id == categoria.id %}Selected {% endif %}>{{categoria.nombre}}</option>
+                <option value="0" selected>Seleccionar...</option>
+                {% for categoria in Categoria %}
+                    <option value="{{categoria.pk}}" {% if categoria.id == item.categoria.id %} {% endif %}>{{categoria.nombre}}</option>
                 {% endfor %}
             </select>
         </div>
     </div>
     <div class="row">
         <div class="col-12 col-md-2 offset-md-3">Opciones</div>
-        <div class="col-12 col-md-5">
+        <div class="col-12 col-md-5 mt-3">
             <input type="submit" name="btnGuardar" class="btn btn-danger" value="Guardar">
             <input type="submit" name="btnLimpiar" class="btn btn-outline-secondary" value="Limpiar">
             <a href="{% url 'listarProductos' %}" class="btn btn-success">Listar</a>
