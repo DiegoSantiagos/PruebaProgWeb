@@ -1,0 +1,21 @@
+{% block tituloPestana %} Listar Carrito Usuario {% endblock %}
+{% block tituloPrincipal %} Carrito {% endblock %}
+{% block mensaje %}
+{% endblock %}
+{% block contenido %}
+    <form action="{% url 'login' %}"></form>
+    {% csrf_token %}
+    <table class="table table-responsive">
+        {{form.as_table}}
+        <center>
+        <table class="table table-responsive">
+            {{form.as_table}}
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Aceptar"></td>
+            </tr>
+        </center>
+    </table>
+{% endblock %}
+{% block listado %}
+{% endblock %}
