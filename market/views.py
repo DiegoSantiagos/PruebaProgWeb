@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Productos,Usuario,Compras,Carrito,Direccion,MetodoPago,Comentarios,Calificacion,Favoritos,Categoria
+from .forms import UsuarioForm , ProductoForm
 # Create your views here.
 def menu(request):
     return render(request, 'plantillaBase.html', {})
