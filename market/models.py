@@ -19,19 +19,21 @@ class Productos(models.Model):
     Categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.nombre + ' ' + self.precio + ' ' + str(self.fecha_creacion) + ' ' + str(self.fecha_modificacion)
+        return self.nombre + ' ' + self.precio + ' ' + self.descripcion 
     
 class Usuario(models.Model):
     nombre = models.CharField(max_length=50)
-    apellidos = models.CharField(max_length=50)
+    apellido = models.CharField(max_length=50)
     foto = models.FileField(upload_to='fotoUsuario/', null=True)
     email = models.EmailField()
+    contrasena = models.CharField(max_length=50)
+    telefono = models.CharField(max_length=20)
     fecha_nacimiento = models.DateField()
     fecha_cuanta = models.DateTimeField(auto_now_add=True)
     
 
     def __str__(self):
-        return self.nombre + ' ' + self.apellidos + ' ' + self.email + ' ' + str(self.fecha_nacimiento) + ' ' + str(self.fecha_cuanta)
+        return self.nombre + ' ' + self.apellido + ' ' + self.email + ' ' + self.contrasena + ' '  + self.direccion + ' ' + self.telefono
 
 class Compras(models.Model):
     producto = models.ForeignKey(Productos, on_delete=models.CASCADE)
@@ -53,7 +55,7 @@ class Carrito(models.Model):
         return self.producto.nombre + ' ' + self.usuario.nombre + ' ' + str(self.fecha_agregado) + ' ' + str(self.cantidad)
     
 class Direccion(models.Model):
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE,related_name='direcciones')
     direccion = models.TextField()
     ciudad = models.CharField(max_length=50)
     estado = models.CharField(max_length=50)

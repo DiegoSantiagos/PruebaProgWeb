@@ -5,15 +5,14 @@ from .models import Usuario, Productos
 class UsuarioForm(ModelForm):
     class Meta:
         model = Usuario
-        fields = ['nombre', 'apellido', 'correo', 'telefono', 'direccion', 'contrasena', 'foto']
+        fields = ['nombre', 'apellido', 'foto', 'email', 'telefono', 'contrasena']
         labels = {
             'nombre': 'Nombre',
             'apellido': 'Apellido',
-            'correo': 'Correo',
+            'foto': 'Foto de perfil',
+            'email': 'email',
             'telefono': 'Telefono',
-            'direccion': 'Direccion',
-            'contrasena': 'Contrasena',
-            'foto': 'Foto de perfil'
+            'contrasena': 'Contrasena'
         }
         widgets = {
             'nombre': forms.TextInput(attrs={
@@ -24,12 +23,14 @@ class UsuarioForm(ModelForm):
             'apellido': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Ingrese su apellido'
-                
+                }),
+            'foto': forms.FileInput(attrs={
+                'class': 'form-control'
                 }),
 
-            'correo': forms.EmailInput(attrs={
+            'email': forms.EmailInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Ingrese su correo'
+                'placeholder': 'Ingrese su email'
                 }),
 
             'telefono': forms.TextInput(attrs={
@@ -37,21 +38,44 @@ class UsuarioForm(ModelForm):
                 'placeholder': 'Ingrese su telefono'
                 }),
 
-            'direccion': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Ingrese su residencia'
-                }),
-
             'contrasena': forms.PasswordInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Ingrese contraseña'
-                }),
-            'foto': forms.FileInput(attrs={
-                'class': 'form-control'
                 })
         }
     
 class ProductoForm(forms.ModelForm):
     class Meta:
         model = Productos
-        fields = ['nombre', 'descripcion', 'imagen']
+        fields = ['nombre', 'precio', 'imagen', 'descripcion', 'Categoria']
+        labels = {
+            'nombre': 'Nombre',
+            'precio': 'Precio',
+            'imagen': 'Imagen',
+            'descripcion': 'Descripcion',
+            'Categoria': 'Categoria'
+        }
+        widgets = {
+            'nombre': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Ingrese el nombre del producto'
+                }),
+
+            'precio': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Ingrese el precio del producto'
+                }),
+
+            'imagen': forms.ClearableFileInput(attrs={
+                'class': 'form-control'
+                }),
+
+            'descripcion': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Ingrese la descripcion del producto'
+                }),
+
+            'Categoria': forms.Select(attrs={
+                'class': 'form-control'
+                })
+        }

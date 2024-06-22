@@ -17,18 +17,18 @@
 
 <table class="table table-responsive table-striped">
     <tr>
+        <th>imagen</th>
         <th>Nombre</th>
         <th>Precio</th>
         <th>Descripcion</th>
-        <th>Foto</th>
         <th>Categoria</th>
     </tr>
     {% for producto in listadoProductos %}
     <tr>
+        <td><img src="{{MEDIA_URL}}{{ producto.imagen }}" alt="imagen" width="100" height="100"></td>
         <td>{{ producto.nombre }}</td>
         <td>{{ producto.precio }}</td>
         <td>{{ producto.descripcion }}</td>
-        <td><img src="{{ producto.foto.url }}" alt="Foto" width="100" height="100"></td>
         <td>{{ producto.Categoria }}</td>
 
     </tr>

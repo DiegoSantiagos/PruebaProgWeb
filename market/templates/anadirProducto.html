@@ -18,7 +18,7 @@
 {% endif %}
 {% endblock %}
 {% block contenido %}
-<form action="{% url 'anadirProducto' %}" method="post">
+<form action="{% url 'anadirProducto' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="row">
         <div class="col-12 col-md-2 offset-md-3">Nombre</div>
@@ -40,9 +40,9 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12 col-md-2 offset-md-3">Foto</div>
+        <div class="col-12 col-md-2 offset-md-3">imagen</div>
         <div class="col-12 col-md-5">
-            <input type="file" name="txtFoto" class="form-control" value="{{item.foto}}">
+            <input type="file" name="txtimagen" class="form-control" value="{{item.foto}}">
         </div>
     </div>
     <div class="row">
