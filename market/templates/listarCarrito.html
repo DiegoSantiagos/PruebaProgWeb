@@ -15,12 +15,12 @@
             <th>Cantidad</th>
             <th>Descripcion</th>
         </tr>
-        {% for item in carrito_items %}
-    <img src="{{ item.producto.imagen.url }}" alt="{{ item.producto.nombre }}">
-    <p>{{ item.producto.nombre }}</p>
-    <p>Precio: {{ item.producto.precio }}</p>
-    <p>Cantidad: {{ item.cantidad }}</p>
-    <p>Descripción: {{ item.producto.descripcion }}</p>
+    {% for item in carrito_items %}
+        <img src="{{ item.producto.imagen.url }}" alt="{{ item.producto.nombre }}">
+        <p>{{ item.producto.nombre }}</p>
+        <p>Precio: {{ item.producto.precio }}</p>
+        <p>Cantidad: {{ item.cantidad }}</p>
+        <p>Descripción: {{ item.producto.descripcion }}</p>
     {% endfor %}
     </table>
 
