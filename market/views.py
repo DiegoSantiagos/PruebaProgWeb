@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Productos,Usuario,Compras,Carrito,Direccion,MetodoPago,Comentarios,Calificacion,Favoritos,Categoria
 from .forms import UsuarioForm , ProductoForm
 from tienda.settings import MEDIA_URL
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 def menu(request):
     return render(request, 'plantillaBase.html', {})
@@ -21,37 +22,10 @@ def listarCarrito(request):
     context = {'listadoCarrito': listadoCarrito}
     return render(request, 'listarCarrito.html', context)
 
-
-def anadirProducto(request):
-    context = {}
-    context['Categoria'] = Categoria.objects.all()
-    if request.method == 'POST':
-        id = int(request.POST.get('txtId', 0))
-        nombre = request.POST['txtNombre']
-        precio = request.POST['txtPrecio']
-        descripcion = request.POST['txtDescripcion']
-        idCategoria = request.POST['cmbCategoria']
-        imagen = request.FILES.get('txtimagen')
-        if 'btnGuardar' in request.POST:
-            if len(nombre.strip()) < 1:
-                context['error'] = 'El nombre no puede estar vacío'
-            elif len(descripcion.strip()) < 1:
-                context['error'] = 'La descripción no puede estar vacía'
-            else:
-                categoria = Categoria.objects.get(pk=idCategoria)
-                if id == 0:
-                    Productos.objects.create(nombre=nombre, precio=precio, descripcion=descripcion, Categoria=categoria, imagen=imagen)
-                else:
-                    producto = Productos.objects.get(pk=id)
-                    producto.nombre = nombre
-                    producto.precio = precio
-                    producto.descripcion = descripcion
-                    producto.Categoria = categoria 
-                    if imagen: 
-                        producto.imagen = imagen
-                    producto.save()
-                context['exito'] = 'Producto añadido correctamente'
-    return render(request, 'anadirProducto.html', context)
+def listarCategoria(request):
+    listadoCategoria = Categoria.objects.all()
+    context = {'listadoCategoria': listadoCategoria}
+    return render(request, 'listarCategoria.html', context)
 
 def anadirProductoForm(request):
     context = {'form': ProductoForm()}
@@ -76,39 +50,6 @@ def anadirProductoForm(request):
         context['MEDIA_URL'] = MEDIA_URL
     return render(request, 'anadirProductoForm.html', context)
 
-            
-        
-    # context= {}
-    # context['Categoria'] = Categoria.objects.all()
-    
-    # if request.method == 'POST':
-    #     id = request.POST['txtId']
-    #     nombre = request.POST['txtNombre']
-    #     precio = request.POST['txtPrecio']
-    #     descripcion = request.POST['txtDescripcion']
-    #     idCategoria = request.POST['cmbCategoria']
-        
-    #     if 'btnGuardar' in request.POST:
-    #         if len(nombre.strip()) < 1:
-    #             context['error'] = 'El nombre no puede estar vacío'
-    #         elif len(descripcion.strip()) < 1:
-    #             context['error'] = 'La descripción no puede estar vacía'
-    #         else:
-    #             categoria = Categoria.objects.get(pk = idCategoria)
-    #             if id == "0":
-    #                 Productos.objects.create(nombre=nombre,precio=precio,descripcion=descripcion,Categoria=categoria,foto=foto)
-    #             else:
-    #                 producto = Productos()
-    #                 producto.id = id
-    #                 producto.nombre = nombre
-    #                 producto.precio = precio
-    #                 producto.descripcion = descripcion
-    #                 producto.categoria = categoria
-    #                 producto.foto = foto
-    #                 producto.save()
-    #             context['exito'] = 'Producto añadido correctamente'
-    # return render(request, 'anadirProducto.html', context)
-
 def buscarCategoria(request, pk):
     context = {}
     try:
@@ -118,11 +59,6 @@ def buscarCategoria(request, pk):
         context['error'] = 'Error al buscar el registro'
 
     return render(request, 'guardarEscuela.html', context)
-
-def listarCategoria(request):
-    listadoCategoria = Categoria.objects.all()
-    context = {'listadoCategoria': listadoCategoria}
-    return render(request, 'listarCategoria.html', context)
 
 def anadirCategoria(request):
     context = {}
@@ -146,3 +82,32 @@ def anadirCategoria(request):
         categoria.save()
         context['exito'] = 'Categoria añadida correctamente'
     return render(request, 'anadirCategoria.html', context)
+
+def editarProducto(request, pk):
+    context = {}
+    try:
+        item = Productos.objects.get(pk=pk)
+        context['item'] = item
+        context['form'] = ProductoForm(instance=item)
+    except:
+        context['error'] = 'Error al buscar el registro'
+    return render(request, 'anadirProductoForm.html', context)
+
+@login_required
+def anadirCarrito(request, pk):
+    context = {}
+    try:
+        producto = Productos.objects.get(pk=pk)
+    except Productos.DoesNotExist:
+        context['error'] = 'El producto no existe'
+    
+    carrito, creado = Carrito.objects.get_or_create(
+        producto=producto,
+        usuario=request.user,
+        defaults={'cantidad': 1}
+    )
+    if not creado:
+        carrito.cantidad += 1
+        carrito.save()
+    
+    return render(request, 'listarCarrito.html', context)

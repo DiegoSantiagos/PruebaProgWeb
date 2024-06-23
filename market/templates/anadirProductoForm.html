@@ -2,7 +2,7 @@
 {% block tituloPestana %} Añadir Productos {% endblock %}
 {% block css %}{% endblock %}
 {% block js %} {% endblock %}
-{% block tituloPrincipal %} Productos {% endblock %}
+{% block tituloPrincipal %}Añadir Producto {% endblock %}
 {% block mensaje %}
 {% if exito %}
 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -23,7 +23,7 @@
     {% csrf_token %}
     <input type="hidden" name="txtId" value="0{{item.id}}">
     <div class="row">
-        <div class="col-12 col-md-2 offset-md-3">
+        <div class="col-12 col-md-7 offset-md-3">
             <table>
                 {{form.as_table}}
             </table>

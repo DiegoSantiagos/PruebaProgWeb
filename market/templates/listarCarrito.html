@@ -9,17 +9,18 @@
 
     <table class="table table-responsive table-striped">
         <tr>
+            <th>Foto</th>
             <th>Nombre</th>
             <th>Precio</th>
+            <th>Cantidad</th>
             <th>Descripcion</th>
-            <th>Foto</th>
         </tr>
-    {% for usuario in usuarios  %}
-        <tr>
-            <td>{{carrito.producto}}</td>
-            <td>{{usuario.Precio}}</td>
-            <td>{{usuario.Descripcion}}</td>
-            <td><img src="{{usuario.foto.url}}" alt="Foto" width="100" height="100"></td>
+        {% for item in carrito_items %}
+    <img src="{{ item.producto.imagen.url }}" alt="{{ item.producto.nombre }}">
+    <p>{{ item.producto.nombre }}</p>
+    <p>Precio: {{ item.producto.precio }}</p>
+    <p>Cantidad: {{ item.cantidad }}</p>
+    <p>Descripción: {{ item.producto.descripcion }}</p>
     {% endfor %}
     </table>
 

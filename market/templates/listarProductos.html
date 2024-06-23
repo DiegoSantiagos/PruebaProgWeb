@@ -2,7 +2,7 @@
 {% load static %}
 {% block tituloPestana %} Listar Productos {% endblock %}
 {% block css %}
-<!-- <link rel="stylesheet" type="text/css" href="{% static 'market/css/styleBusqueda.css' %}">  -->
+<link rel="stylesheet" type="text/css" href="{% static '../static/css/styleBusqueda.css' %}">
 {% endblock %}
 {% block js %} {% endblock %}
 {% block tituloPrincipal %} Productos {% endblock %}
@@ -10,29 +10,31 @@
 {% endblock %}
 {% block contenido %}
 
-<a href="{% url 'anadirProducto' %}" class="btn btn-primary">Ingresar</a>
+<a href="{% url 'anadirProductoForm' %}" class="btn btn-primary">Subir Producto</a>
 
 {% endblock %}
 {% block listado %}
 
 <table class="table table-responsive table-striped">
-    <tr>
-        <th>imagen</th>
-        <th>Nombre</th>
-        <th>Precio</th>
-        <th>Descripcion</th>
-        <th>Categoria</th>
-    </tr>
     {% for producto in listadoProductos %}
-    <tr>
-        <td><img src="{{MEDIA_URL}}{{ producto.imagen }}" alt="imagen" width="100" height="100"></td>
-        <td>{{ producto.nombre }}</td>
-        <td>{{ producto.precio }}</td>
-        <td>{{ producto.descripcion }}</td>
-        <td>{{ producto.Categoria }}</td>
-
-    </tr>
-    {% endfor %}
+    <td>
+        <div>
+            <div class="col {{ producto.Categoria }} filterDiv show " id="{{ producto.Categoria }}">
+                <div class="card h-100">
+                    <a href="../producto/index.html" class="cartas">
+                        <img src="{{MEDIA_URL}}{{ producto.imagen }}" class="card-img-top" alt="Fallo al cargar">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ producto.nombre }}</h5>
+                            <div class="sc-prec">
+                                $<p class="card-text " id="precio">{{ producto.precio }}</p>
+                            </div>
+                            <p class="card-text">{{ producto.descripcion }}</p>
+                        </div>
+                    </a>
+                    <a href="{#% url 'anadirCarrito' %#}" class="btn carri btn-primary">añadir al carrito</a>
+                </div>
+            </div>
+            {% endfor %}
 </table>
 
 {% endblock %}

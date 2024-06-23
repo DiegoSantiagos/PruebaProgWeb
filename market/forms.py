@@ -70,12 +70,13 @@ class ProductoForm(forms.ModelForm):
                 'class': 'form-control'
                 }),
 
-            'descripcion': forms.Textarea(attrs={
+            'descripcion': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Ingrese la descripcion del producto'
                 }),
 
             'Categoria': forms.Select(attrs={
                 'class': 'form-control'
-                })
+                }) 
         }
+    

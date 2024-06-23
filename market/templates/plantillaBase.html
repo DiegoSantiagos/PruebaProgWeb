@@ -11,12 +11,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     {% block js %}{% endblock %}
+    <script src="{% static '../static/js/uds_dolar.js' %}"></script>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{% url 'index' %}">HolaComoEstas</a>
+                <a class="navbar-brand" href="{# url 'index' %#}">HolaComoEstas</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -28,13 +29,16 @@
                             <a class="nav-link" href="{% url 'listarProductos' %}">Catalogo</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="{% url 'listarCategoria' %}">Categoria</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{% url 'listarCarrito' %}">Carrito</a>
                         </li>
                     </ul>
                     <a class="btn btn-outline-success" id="boton-clp-usd" onclick="cambiar()">CLP a USD</a>
                     <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#login"
                         data-bs-whatever="@mdo">LogIn</button>
-                    <a class="btn btn-outline-success" href="{% url 'anadirProducto' %}">Añadir Producto</a>
+                    <a class="btn btn-outline-success" href="{% url 'anadirProductoForm' %}">Añadir Producto</a>
                     <div class="modal fade login" id="login" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog" style="color: rgb(182, 182, 182);">
