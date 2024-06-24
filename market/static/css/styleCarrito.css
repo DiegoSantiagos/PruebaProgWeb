@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main {
+    background-color: rgb(66, 66, 66);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block-start: 20px;
+}
+
+.productos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sc-prec {
+    display: flex;
+    flex-direction: row;
+}
+
+@media screen and (max-width: 768px) {
+    main {
+        padding: 0px;
+        min-width: auto;
+    }
+
+    .productos {
+        max-height: 100%;
+    }
+}

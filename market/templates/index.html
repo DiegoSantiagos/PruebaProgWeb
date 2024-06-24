@@ -1,12 +1,63 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda</title>
-</head>
-<body>
-</body>
-</html>
+{% extends "plantillaBase.html" %}
+{% load static %}
+{% block tituloPestana %} Principal {% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/styleMenu.css' %}">
+{% endblock %}
+{% block js %}
+<!-- Asegúrate de incluir aquí cualquier JavaScript específico que necesites, o deja el bloque vacío si no es necesario -->
+{% endblock %}
+{% block tituloPrincipal %} Título {% endblock %}
+{% block mensaje %}
+<!-- Este bloque puede contener mensajes de error o confirmación, déjalo vacío si no es necesario -->
+{% endblock %}
+{% block contenido %}
+<section class="carrusel">
+    <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="10000">
+                <img src="../../media/imagenesProductos/1.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+                <img src="../../media/imagenesProductos/2.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="../../media/imagenesProductos/3.jpg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button id="flecha-carru-iz" class="carousel-control-prev" type="button"
+            data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button id="flecha-carru-der" class="carousel-control-next" type="button"
+            data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</section>
+<section>
+    <h1 class="title"> Productos Destacados</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
+        {% for producto in productos %}
+            <div class="col {{producto.categoria}} filterDiv show">
+                <div class="card h-100">
+                    <a href="{% url 'verProducto' pk=producto.id %}" class="cartas">
+                        <img src="{{producto.imagen.url}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{producto.nombre}}</h5>
+                            <div class="sc-prec">
+                                $<p class="card-text" id="precio">{{producto.precio}}</p>
+                            </div>
+                            <p class="card-text">{{producto.descripcion}}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+    {% endfor %}
+</section>
+{% endblock %}
+{% block listado %}
+<!-- Este bloque puede ser utilizado para listar otros elementos si es necesario, déjalo vacío si no es necesario -->
+{% endblock %}

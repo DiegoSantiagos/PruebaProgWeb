@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'market',
+    'crispy_forms',
+    "crispy_bootstrap5",
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -71,6 +74,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'tienda.wsgi.application'
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -126,5 +132,5 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = 'menu'
-LOGOUT_REDIRECT_URL = 'login'
+LOGIN_REDIRECT_URL = '/market/'
+LOGOUT_REDIRECT_URL = '/'

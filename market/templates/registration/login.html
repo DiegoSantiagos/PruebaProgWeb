@@ -1,0 +1,49 @@
+{% extends "plantillaBase.html" %} 
+
+{% block tituloPestana %} Registro {% endblock %} 
+
+{% block mensajes %} 
+{% if mensaje %}
+    <div class="alert alert-success" role="alert">
+        {{ mensaje }}
+    </div>
+{% elif error %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+{% endif %}
+{% endblock %}
+
+{% block contenido %} 
+<center>
+<div class="container">
+    <br>
+    <br>
+    <br>
+    <br>
+
+<h2 class="title ">Inicio de Sesion</h2>
+
+{% load crispy_forms_tags %}
+<div class="col-10 col-md-4 offset-md-0 mt-3 mb-4">
+    <div class="card">
+        <div class="card-body">
+    <form action="" method="POST">
+        {% csrf_token %}
+        
+        
+            {{ form | crispy }}
+        
+            
+        
+        <input type="submit" value="login" class="btn btn-primary float-right">
+        <hr>
+        <p>¿No tienes cuenta?:  <a href="{% url 'registrar' %}" class="text " >Registrate aqui</a></p>
+        
+        </form>
+        </div>
+    </div>  
+</div>
+</div>
+</center>
+{% endblock %}

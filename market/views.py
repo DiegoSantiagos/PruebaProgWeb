@@ -1,14 +1,34 @@
 from django.shortcuts import render, redirect
 from .models import Productos,Usuario,Compras,Carrito,Direccion,MetodoPago,Comentarios,Categoria
-from .forms import UsuarioForm , ProductoForm, CategoriaForm
+from .forms import UsuarioForm , ProductoForm, CategoriaForm,CustomUserForm
 from tienda.settings import MEDIA_URL
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import  authenticate, login
 # Create your views here.
+
+def registro_usuario(request): 
+    contexto = {}
+    data = {
+        'form':CustomUserForm()
+    } 
+    if request.method == 'POST':
+        formulario = CustomUserForm(data=request.POST )
+        if formulario.is_valid():
+            formulario.save()
+            user = authenticate(username = formulario.cleaned_data["username"], password = formulario.cleaned_data["password1"])
+            login(request, user)
+            return redirect(to= 'index')
+        data ["form"] = formulario
+    return render (request, 'registrar.html' , data )
+
+
 def menu(request):
     return render(request, 'plantillaBase.html', {})
 
-def index(request):
-    context = {}
+def index(request):  #obtiene los productos de la base
+    productos = Productos.objects.order_by('?')[:3]
+    context = {'productos': productos}
+    context['MEDIA_URL'] = MEDIA_URL
     return render(request, 'index.html', context)
 
 def listarProductos(request):
@@ -184,19 +204,3 @@ def eliminarCarrito(request, pk):
         context['error'] = 'Error al eliminar el carrito'
     context['listadoCarrito'] = Carrito.objects.all()
     return render(request, 'listarCarrito.html', context)
-
-def registroUsuario(request):
-    context = {'form': UsuarioForm()}
-    if request.method == 'POST':
-        if 'btnGuardar' in request.POST:
-            item = None
-            form = UsuarioForm(request.POST, instance=item)
-            if form.is_valid():
-                form.save()
-                context['exito'] = 'Usuario añadido correctamente'
-            else:
-                context['error'] = 'Error al guardar el usuario'
-            context['listado'] = Usuario.objects.all()
-        else:
-            context['listado'] = Usuario.objects.all()
-    return render(request, '../templates/registration/registro.html', context)

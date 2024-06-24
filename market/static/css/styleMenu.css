@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.carrusel {
+    padding-top: 20px;
+    background-color: grey;
+}
+
+.cartas img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border: 1px solid rgb(44, 44, 44);
+}
+
+.sc-prec {
+    display: flex;
+    flex-direction: row;
+}
+
+#flecha-carru-iz,
+#flecha-carru-der {
+    padding: 10px 10px;
+}
+
+#flecha-carru-der {
+    justify-content: right;
+}
+
+#flecha-carru-iz {
+    justify-content: left;
+}
+
+.cartas {
+    text-decoration: none;
+    color: black;
+}
+
+@media screen and (max-width: 768px) {
+    .cartas img {
+        height: 300px;
+    }
+}

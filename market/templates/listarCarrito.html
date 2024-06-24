@@ -1,6 +1,10 @@
 {% extends "plantillaBase.html" %}
+{% load static %}
 {% block tituloPestana %} Listar Carrito Usuario {% endblock %}
 {% block tituloPrincipal %} Carrito {% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static '../static/css/styleCarrito.css' %}"> 
+{% endblock %}
 {% block mensaje    %}
 {% endblock %}
 {% block contenido  %}
@@ -8,26 +12,48 @@
 {% block listado    %}
 
     <table class="table table-responsive table-striped">
-        <tr>
-            <th>Foto</th>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Cantidad</th>
-            <th>Descripcion</th>
-            <th>Eliminar</th>
-        </tr>
+        
         {% for item in listadoCarrito %}
-            <tr>
-                {%  if user.is_authenticated %}
-                <th><img src="{{ item.producto.imagen.url }}" alt="{{ item.producto.nombre }}"></th>
-                <th><p>{{ item.producto.nombre }}</p></th>
-                <th><p>Precio: {{ item.producto.precio }}</p></th>
-                <th><p>Cantidad: {{ item.cantidad }}</p></th>
-                <th><p>Descripción: {{ item.producto.descripcion }}</p></th>
-                <th><a href="{% url 'eliminarCarrito' item.id %}" class="btn btn-danger">Eliminar</a></th>
-                {% endif %}
-            </tr>
+            <div class="card mb-3 1" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{{ item.producto.imagen.url }}" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{item.producto.nombre}}</h5>
+                            <div class="sc-prec">
+                                $<p class="card-text " id="precio">{{item.producto.precio}}</p>
+                            </div>
+                            <p class="card-text">{{item.producto.descripcion}}</p>
+                            <p id="{{item.pk}}" class="form-control">Cantidad: {{item.cantidad}} </p>
+                            <button class="btn btn-danger" data-bs-target="#exampleModalToggle{{item.id}}" data-bs-toggle="modal">Eliminar</button>
+                            <div class="modal fade" id="exampleModalToggle{{item.id}}" aria-labelledby="exampleModalToggleLabel" tabindex="-1" style="display: none;" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Seguro de eliminar?</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Si estas seguro de eliminar el producto del carrito, presiona el boton eliminar.
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="{% url 'eliminarCarrito' item.id %}" class="btn btn-danger">Eliminar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
         {% endfor %}
     </table>
 
 {% endblock %}
+
+
+    
+  
