@@ -11,7 +11,6 @@ class UsuarioForm(ModelForm):
             'apellido': 'Apellido',
             'foto': 'Foto de perfil',
             'email': 'email',
-            'telefono': 'Telefono',
             'contrasena': 'Contrasena'
         }
         widgets = {

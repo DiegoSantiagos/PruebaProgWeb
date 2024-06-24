@@ -24,15 +24,19 @@
         <tr>
             <th>Nombre</th>
             <th>Descripcion</th>
+            {% if request.user.is_authenticated %}
             <th>Eliminar</th>
             <th>Editar</th>
+            {% endif %}
         </tr>
     {% for categoria in listado %}
         <tr>
             <td>{{categoria.nombre}}</td>
             <td>{{categoria.descripcion}}</td>
+            {% if request.user.is_authenticated %}
             <td><a href="{% url 'eliminarCategoria' categoria.id %}" class="btn btn-danger">Eliminar</a></td>
             <td><a href="{% url 'editarCategoria' categoria.id %}" class="btn btn-warning">Editar</a></td>
+            {% endif %}
         </tr>
     {% endfor %}
     </table>

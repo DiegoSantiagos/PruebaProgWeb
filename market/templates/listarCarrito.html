@@ -18,12 +18,14 @@
         </tr>
         {% for item in listadoCarrito %}
             <tr>
+                {%  if user.is_authenticated %}
                 <th><img src="{{ item.producto.imagen.url }}" alt="{{ item.producto.nombre }}"></th>
                 <th><p>{{ item.producto.nombre }}</p></th>
                 <th><p>Precio: {{ item.producto.precio }}</p></th>
                 <th><p>Cantidad: {{ item.cantidad }}</p></th>
                 <th><p>Descripción: {{ item.producto.descripcion }}</p></th>
                 <th><a href="{% url 'eliminarCarrito' item.id %}" class="btn btn-danger">Eliminar</a></th>
+                {% endif %}
             </tr>
         {% endfor %}
     </table>

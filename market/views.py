@@ -27,6 +27,7 @@ def listarCategoria(request):
     context = {'listado': listadoCategoria}
     return render(request, 'listarCategoria.html', context)
 
+@login_required
 def anadirProductoForm(request):
     context = {'form': ProductoForm()}
     if request.method == 'POST':
@@ -60,6 +61,7 @@ def buscarCategoria(request, pk):
 
     return render(request, 'guardarEscuela.html', context)
 
+@login_required
 def anadirCategoriaForm(request):
     context = {'form': CategoriaForm()}
     if request.method == 'POST':
@@ -78,6 +80,7 @@ def anadirCategoriaForm(request):
             context['listado'] = Categoria.objects.all()
     return render(request, 'anadirCategoriaForm.html', context)
 
+@login_required
 def editarProducto(request, pk):
     context = {}
     try:
@@ -107,22 +110,6 @@ def anadirCarrito(request, pk):
     
     context = {'listadoCarrito': Carrito.objects.all()}
     return render(request, 'listarCarrito.html', context)
-# @login_required
-# def anadirCarrito(request, pk):
-#     context = {}
-#     try:
-#         producto = Productos.objects.get(pk=pk)
-#     except Productos.DoesNotExist:
-#         context['error'] = 'El producto no existe'
-#     carrito, creado = Carrito.objects.get_or_create(
-#         producto=producto
-#     )
-#     if not creado:
-#         carrito.cantidad += 1
-#         carrito.save()
-    
-#     return render(request, 'listarCarrito.html', context)
-
 
 def verProducto(request, pk):
     context = {}
@@ -132,8 +119,10 @@ def verProducto(request, pk):
     except Productos.DoesNotExist:
         context['error'] = 'El producto no existe'
     
+    context['MEDIA_URL'] = MEDIA_URL
     return render(request, 'verProducto.html', context)
 
+@login_required
 def editarProducto(request, pk):
     context = {}
     try:
@@ -144,6 +133,7 @@ def editarProducto(request, pk):
         context['error'] = 'Error al buscar el registro'
     return render(request, 'anadirProductoForm.html', context)
 
+@login_required
 def eliminarProducto(request, pk):
     context = {}
     try:
@@ -158,6 +148,7 @@ def eliminarProducto(request, pk):
     context['MEDIA_URL'] = MEDIA_URL
     return render(request, 'listarProductos.html', context)
 
+@login_required
 def eliminarCategoria(request, pk):
     context = {}
     try:
@@ -170,6 +161,7 @@ def eliminarCategoria(request, pk):
     context['listado'] = Categoria.objects.all()
     return render(request, 'listarCategoria.html', context)
 
+@login_required
 def editarCategoria(request, pk):
     context = {}
     try:
@@ -180,6 +172,7 @@ def editarCategoria(request, pk):
         context['error'] = 'Error al buscar el registro'
     return render(request, 'anadirCategoriaForm.html', context)
 
+@login_required
 def eliminarCarrito(request, pk):
     context = {}
     try:

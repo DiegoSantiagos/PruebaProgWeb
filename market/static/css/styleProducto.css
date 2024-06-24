@@ -1,0 +1,90 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+.arribac {
+    display: flex;
+    align-items: center;
+    max-width: 1712px;
+    margin: 0px 48px;
+}
+
+.precio {
+    display: flex;
+    align-items: center;
+    font-size: 40px;
+}
+
+.precio p {
+    font-size: 38px;
+}
+
+.imag {
+    width: auto;
+    height: 600px;
+}
+
+.datos {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+}
+
+.prod {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pago {
+    border: 1px solid black;
+    margin: 0px auto;
+    padding: 10px;
+    display: block;
+    justify-content: space-between;
+}
+
+.precio {
+    display: flex;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .arribac {
+        flex-direction: row;
+        margin: 0px auto;
+    }
+
+    .prod {
+        display: flex;
+        flex-direction: row;
+
+    }
+
+    .datos {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .arribac {
+        flex-direction: column;
+        margin: 0px auto;
+    }
+
+    .prod {
+        display: block;
+        flex-direction: column;
+
+    }
+
+    .datos {
+        padding: 10px;
+    }
+
+    .imag {
+        width: 100%;
+        height: auto;
+    }
+}
