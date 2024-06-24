@@ -7,19 +7,14 @@
 {% endblock %}
 {% block contenido %}
 
-<form action="{% url 'anadirCategoria' %}" method="post">
+<form action="{% url 'anadirCategoriaForm' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
+    <input type="hidden" name="txtId" value="0{{item.id}}">
     <div class="row">
-        <div class="col-12 col-md-2 offset-md-3">Nombre</div>
-        <div class="col-12 col-md-5">
-            <input type="hidden" name="txtId" value="0{{item.id}}">
-            <input type="text" name="txtNombre" class="form-control" value="{{item.nombre}}">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12 col-md-2 offset-md-3">Descripcion</div>
-        <div class="col-12 col-md-5">
-            <input type="text" name="txtDescripcion" class="form-control" value="{{item.descripcion}}">
+        <div class="col-12 col-md-7 offset-md-3">
+            <table>
+                {{form.as_table}}
+            </table>
         </div>
     </div>
     <div class="row">

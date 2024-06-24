@@ -1,0 +1,20 @@
+{% extends "plantillaBase.html" %}
+{% load static %}
+{% block tituloPestana %} Mostar Productos {% endblock %}
+{% block css %}
+{% endblock %}
+{% block js %} {% endblock %}
+{% block tituloPrincipal %}Producto {% endblock %}
+{% block mensaje %}
+{% endblock %}
+{% block contenido %}
+
+<h1>{{ item.nombre }}</h1>
+<img src="{{MEDIA_URL}}{{ item.imagen }}" class="card-img-top" alt="Fallo al cargar">
+<p>{{ item.descripcion }}</p>
+
+
+{% endblock %}
+{% block listado %}
+
+{% endblock %}

@@ -14,14 +14,18 @@
             <th>Precio</th>
             <th>Cantidad</th>
             <th>Descripcion</th>
+            <th>Eliminar</th>
         </tr>
-    {% for item in carrito_items %}
-        <img src="{{ item.producto.imagen.url }}" alt="{{ item.producto.nombre }}">
-        <p>{{ item.producto.nombre }}</p>
-        <p>Precio: {{ item.producto.precio }}</p>
-        <p>Cantidad: {{ item.cantidad }}</p>
-        <p>Descripción: {{ item.producto.descripcion }}</p>
-    {% endfor %}
+        {% for item in listadoCarrito %}
+            <tr>
+                <th><img src="{{ item.producto.imagen.url }}" alt="{{ item.producto.nombre }}"></th>
+                <th><p>{{ item.producto.nombre }}</p></th>
+                <th><p>Precio: {{ item.producto.precio }}</p></th>
+                <th><p>Cantidad: {{ item.cantidad }}</p></th>
+                <th><p>Descripción: {{ item.producto.descripcion }}</p></th>
+                <th><a href="{% url 'eliminarCarrito' item.id %}" class="btn btn-danger">Eliminar</a></th>
+            </tr>
+        {% endfor %}
     </table>
 
 {% endblock %}

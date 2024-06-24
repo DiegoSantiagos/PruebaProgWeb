@@ -1,11 +1,11 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Usuario, Productos
+from .models import Usuario, Productos, Categoria
 
 class UsuarioForm(ModelForm):
     class Meta:
         model = Usuario
-        fields = ['nombre', 'apellido', 'foto', 'email', 'telefono', 'contrasena']
+        fields = ['nombre', 'apellido', 'foto', 'email', 'contrasena']
         labels = {
             'nombre': 'Nombre',
             'apellido': 'Apellido',
@@ -15,6 +15,7 @@ class UsuarioForm(ModelForm):
             'contrasena': 'Contrasena'
         }
         widgets = {
+            
             'nombre': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Ingrese su nombre'
@@ -31,11 +32,6 @@ class UsuarioForm(ModelForm):
             'email': forms.EmailInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Ingrese su email'
-                }),
-
-            'telefono': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Ingrese su telefono'
                 }),
 
             'contrasena': forms.PasswordInput(attrs={
@@ -78,5 +74,25 @@ class ProductoForm(forms.ModelForm):
             'Categoria': forms.Select(attrs={
                 'class': 'form-control'
                 }) 
+        }
+        
+class CategoriaForm(forms.ModelForm):
+    class Meta:
+        model = Categoria
+        fields = ['nombre', 'descripcion']
+        labels = {
+            'nombre': 'Nombre',
+            'descripcion': 'Descripcion'
+        }
+        widgets = {
+            'nombre': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Ingrese el nombre de la categoria'
+                }),
+
+            'descripcion': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Ingrese la descripcion de la categoria'
+                })
         }
     

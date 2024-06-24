@@ -16,7 +16,7 @@
     {% endif %}
 {% endblock %}
 {% block contenido  %}
-    <a href="{% url 'anadirCategoria' %}" class="btn btn-primary">Ingresar</a>
+    <a href="{% url 'anadirCategoriaForm' %}" class="btn btn-primary">Ingresar</a>
 {% endblock %}
 {% block listado    %}
 
@@ -27,13 +27,13 @@
             <th>Eliminar</th>
             <th>Editar</th>
         </tr>
-    {% for categoria in listadoCategoria %}
+    {% for categoria in listado %}
         <tr>
             <td>{{categoria.nombre}}</td>
             <td>{{categoria.descripcion}}</td>
-            <td><a href="{#% url 'eliminarCategoria' categoria.id %#}" class="btn btn-danger">Eliminar</a></td>
-            <td><a href="{#% url 'editarCategoria' categoria.id %#}" class="btn btn-warning">Editar</a></td>
-            
+            <td><a href="{% url 'eliminarCategoria' categoria.id %}" class="btn btn-danger">Eliminar</a></td>
+            <td><a href="{% url 'editarCategoria' categoria.id %}" class="btn btn-warning">Editar</a></td>
+        </tr>
     {% endfor %}
     </table>
 
