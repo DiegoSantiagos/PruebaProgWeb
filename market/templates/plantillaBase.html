@@ -42,8 +42,11 @@
                                 Bienvenido {{ user.username }}
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{#% url 'MiCuenta'  %#}">Mi Cuenta</a></li>
                                 <li><a class="dropdown-item" href="{% url 'logout'  %}">Cerrar Sesion</a></li>
+
                             </ul>
+                            
                         </li> 
                     {% else %}
                         <li class="nav-item dropdown btn btn-outline-success">

@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
 
@@ -13,6 +14,7 @@ class Productos(models.Model):
     nombre = models.CharField(max_length=50)
     precio = models.CharField(max_length=10)
     imagen = models.FileField(upload_to='imagenesProductos/', null=True)
+    stock = models.IntegerField(default=0)
     descripcion = models.TextField()
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_modificacion = models.DateTimeField(auto_now=True)
@@ -45,6 +47,7 @@ class Carrito(models.Model):
     producto = models.ForeignKey(Productos, on_delete=models.CASCADE)
     fecha_agregado = models.DateTimeField(auto_now_add=True)
     cantidad = models.IntegerField()
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.producto.nombre + ' ' + str(self.fecha_agregado) + ' ' + str(self.cantidad)

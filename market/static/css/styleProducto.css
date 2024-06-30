@@ -21,9 +21,12 @@
     font-size: 38px;
 }
 
-.imag {
+.arribac img {
+    max-width: 700px;
     width: auto;
-    height: 600px;
+    height: auto;
+    max-height: 30%;
+    object-fit: cover;
 }
 
 .datos {
@@ -59,7 +62,6 @@
     .prod {
         display: flex;
         flex-direction: row;
-
     }
 
     .datos {

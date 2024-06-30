@@ -7,6 +7,15 @@
 {% block js %} {% endblock %}
 {% block tituloPrincipal %} Productos {% endblock %}
 {% block mensaje %}
+{% if mensaje %}
+    <div class="alert alert-success" role="alert">
+        {{ mensaje }}
+    </div>
+{% elif error %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+{% endif %}
 {% endblock %}
 {% block contenido %}
 
@@ -22,18 +31,37 @@
             <div class="col {{ producto.Categoria }} filterDiv show " id="{{ producto.Categoria }}">
                 <div class="card h-100">
                     <a href="{% url 'verProducto' producto.id %}" class="cartas">
+                        {%if producto.stock > 0 %}
                         <img src="{{MEDIA_URL}}{{ producto.imagen }}" class="card-img-top"  alt="Fallo al cargar">
+                        {% else %}
+                        <img src="{{MEDIA_URL}}{{ producto.imagen }}" class="card-img-top" alt="Fallo al cargar" style="filter: grayscale(100%);" >
+                        {% endif %}
                         <div class="card-body">
                             <h5 class="card-title">{{ producto.nombre }}</h5>
                             <div class="sc-prec">
                                 $<p class="card-text " id="precio">{{ producto.precio }}</p>
                             </div>
                             <p class="card-text">{{ producto.descripcion }}</p>
+                            <p class="card-text">stock: {{ producto.stock }}
                         </div>
                     </a>
                     <p></p>
-                    <a href="{% url 'anadirCarrito' pk=producto.id %}" class="btn carri btn-primary">añadir al carrito</a>
-                    {% if request.user.is_authenticated %}
+                    {% if producto.stock > 0 %}
+                    <form method="POST" action="{% url 'anadirCarrito' pk=producto.id %}">
+                        {% csrf_token %}
+                        <div class="d-flex">
+                        <span class="small mb-1">Cantidad:</span>
+                        <input class="form-control text-center me-3" id="txtCantidad{{producto.id}}" type="num"
+                            value="1" style="max-width: 3rem" />
+                        </div>
+                        <button type="submit" name="btnAnadir" value="anadir"
+                            class="btn btn-outline-dark mt-auto">Añadir al
+                            Carrito</button>
+                    </form>
+                    {% else %}
+                    <p class="btn btn-outline-danger mt-auto">Producto Agotado</p>
+                    {% endif %}
+                    {% if user.is_superuser %}
                     <a href="{% url 'editarProducto' producto.id %}" class="btn carri btn-primary">editar producto</a>
                     <a href="{% url 'eliminarProducto' pk=producto.id %}" class="btn carri btn-primary">Eliminar Producto</a>
                     {% endif %}

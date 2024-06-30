@@ -4,6 +4,7 @@ from .models import Usuario, Productos, Categoria
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 class CustomUserForm(UserCreationForm):
     class Meta:
@@ -50,12 +51,13 @@ class UsuarioForm(ModelForm):
 class ProductoForm(forms.ModelForm):
     class Meta:
         model = Productos
-        fields = ['nombre', 'precio', 'imagen', 'descripcion', 'Categoria']
+        fields = ['nombre', 'precio', 'imagen', 'descripcion', 'stock', 'Categoria']
         labels = {
             'nombre': 'Nombre',
             'precio': 'Precio',
             'imagen': 'Imagen',
             'descripcion': 'Descripcion',
+            'sock': 'Stock',
             'Categoria': 'Categoria'
         }
         widgets = {
@@ -66,7 +68,9 @@ class ProductoForm(forms.ModelForm):
 
             'precio': forms.NumberInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Ingrese el precio del producto'
+                'placeholder': 'Ingrese el precio del producto',
+                'min': '0'
+                
                 }),
 
             'imagen': forms.ClearableFileInput(attrs={
@@ -77,11 +81,29 @@ class ProductoForm(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Ingrese la descripcion del producto'
                 }),
+            
+            'stock': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Ingrese la cantidad de stock del producto',
+                'min': '0'
+                }),
 
             'Categoria': forms.Select(attrs={
                 'class': 'form-control'
                 }) 
         }
+    def clean_precio(self):
+        precio = self.cleaned_data.get('precio')
+        if precio is not None and precio < '0':
+            raise ValidationError('El precio no puede ser negativo.')
+        return precio
+
+    def clean_stock(self):
+        stock = self.cleaned_data.get('stock')
+        if stock is not None and stock < 0:
+            raise ValidationError('El stock no puede ser negativo.')
+        return stock
+    
         
 class CategoriaForm(forms.ModelForm):
     class Meta:

@@ -4,6 +4,7 @@ from .forms import UsuarioForm , ProductoForm, CategoriaForm,CustomUserForm
 from tienda.settings import MEDIA_URL
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import  authenticate, login
+from django.contrib.auth.models import User
 # Create your views here.
 
 def registro_usuario(request): 
@@ -26,7 +27,7 @@ def menu(request):
     return render(request, 'plantillaBase.html', {})
 
 def index(request):  #obtiene los productos de la base
-    productos = Productos.objects.order_by('?')[:3]
+    productos = Productos.objects.filter(stock__gt=0).order_by('?')[:3]
     context = {'productos': productos}
     context['MEDIA_URL'] = MEDIA_URL
     return render(request, 'index.html', context)
@@ -38,7 +39,7 @@ def listarProductos(request):
     return render(request, 'listarProductos.html', context)
 
 def listarCarrito(request):
-    listadoCarrito = Carrito.objects.all()
+    listadoCarrito = Carrito.objects.filter(usuario=request.user)
     context = {'listadoCarrito': listadoCarrito}
     return render(request, 'listarCarrito.html', context)
 
@@ -111,24 +112,33 @@ def editarProducto(request, pk):
         context['error'] = 'Error al buscar el registro'
     return render(request, 'anadirProductoForm.html', context)
 
+
 @login_required
 def anadirCarrito(request, pk):
     context = {}
     try:
-        producto = Productos.objects.get(pk=pk)
-        carrito, creado = Carrito.objects.get_or_create(
-            producto=producto,
-            defaults={'cantidad': 1}  # Establece la cantidad inicial a 1 si se crea un nuevo carrito
-        )
-        if not creado:
-            carrito.cantidad += 1  # Incrementa la cantidad si el carrito ya existe
-            carrito.save()
-        context['exito'] = 'Producto añadido al carrito correctamente'
+        if request.method == 'POST':
+            if 'btnAnadir' in request.POST:
+                usuario = request.user
+                producto = Productos.objects.get(pk=pk)
+                varCantidad = 'txtCantidad' + str(pk)
+                cantidad = int(request.POST.get(varCantidad, 1))
+                
+                carrito, creado = Carrito.objects.get_or_create(
+                    producto=producto,
+                    defaults={'cantidad': cantidad},
+                    usuario = usuario
+                )
+                context['exito'] = 'Producto añadido al carrito correctamente'
+                
+                if not creado:
+                    carrito.cantidad += cantidad
+                    carrito.save()
+                    context['exito'] = 'Producto sumado al carrito correctamente'
     except Productos.DoesNotExist:
         context['error'] = 'El producto no existe'
-    
-    
-    context = {'listadoCarrito': Carrito.objects.all()}
+        
+    context = {'listadoCarrito': Carrito.objects.filter(usuario=request.user)}
     return render(request, 'listarCarrito.html', context)
 
 def verProducto(request, pk):
@@ -136,8 +146,12 @@ def verProducto(request, pk):
     try:
         item = Productos.objects.get(pk=pk)
         context['item'] = item
+        randProductos = Productos.objects.order_by('?')[:4]
+        context['randProductos'] = randProductos
     except Productos.DoesNotExist:
         context['error'] = 'El producto no existe'
+    
+    
     
     context['MEDIA_URL'] = MEDIA_URL
     return render(request, 'verProducto.html', context)
@@ -202,5 +216,5 @@ def eliminarCarrito(request, pk):
         context['listadoCarrito'] = Carrito.objects.all()
     except:
         context['error'] = 'Error al eliminar el carrito'
-    context['listadoCarrito'] = Carrito.objects.all()
+    context['listadoCarrito'] = Carrito.objects.filter(usuario=request.user)
     return render(request, 'listarCarrito.html', context)

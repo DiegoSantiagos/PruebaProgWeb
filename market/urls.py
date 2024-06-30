@@ -11,6 +11,7 @@ urlpatterns = [
     path('anadiProductoForm', views.anadirProductoForm, name='anadirProductoForm'),
     path('anadirCategoriaForm', views.anadirCategoriaForm, name='anadirCategoriaForm'),
     path('anadirCarrito/<int:pk>', views.anadirCarrito, name='anadirCarrito'),
+    # path('anadirCarrito/<int:pk>/<int:total>/', views.anadirCarrito, name='anadirCarrito'),
     path('buscarCategoria/<int:pk>', views.buscarCategoria, name='buscarCategoria'),
     path('editarProducto/<int:pk>', views.editarProducto, name='editarProducto'),
     path('eliminarProducto/<int:pk>', views.eliminarProducto, name='eliminarProducto'),
