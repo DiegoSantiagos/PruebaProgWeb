@@ -7,15 +7,18 @@
 {% block js %} {% endblock %}
 {% block tituloPrincipal %} Productos {% endblock %}
 {% block mensaje %}
-{% if mensaje %}
-    <div class="alert alert-success" role="alert">
-        {{ mensaje }}
+    {% if exito %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{exito}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-{% elif error %}
-    <div class="alert alert-danger" role="alert">
-        {{ error }}
+    {% endif %}
+    {% if error %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{error}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-{% endif %}
+    {% endif %}
 {% endblock %}
 {% block contenido %}
 
@@ -51,7 +54,7 @@
                         {% csrf_token %}
                         <div class="d-flex">
                         <span class="small mb-1">Cantidad:</span>
-                        <input class="form-control text-center me-3" id="txtCantidad{{producto.id}}" type="num"
+                        <input class="form-control text-center me-3" name="txtCantidad{{item.id}}" type="number"
                             value="1" style="max-width: 3rem" />
                         </div>
                         <button type="submit" name="btnAnadir" value="anadir"

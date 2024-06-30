@@ -53,9 +53,20 @@
                             <p class="card-text">{{producto.descripcion}}</p>
                         </div>
                     </a>
+                    <form method="POST" action="{% url 'anadirCarrito' pk=producto.id %}">
+                        {% csrf_token %}
+                        <div class="d-flex">
+                        <span class="small mb-1">Cantidad:</span>
+                        <input class="form-control text-center me-3" name="txtCantidad{{item.id}}" type="number"
+                            value="1" max='{{producto.stock}}' style="max-width: 3rem" />
+                        </div>
+                        <button type="submit" name="btnAnadir" value="anadir"
+                            class="btn btn-outline-dark mt-auto">Añadir al
+                            Carrito</button>
+                    </form>
                 </div>
             </div>
-    {% endfor %}
+        {% endfor %}
 </section>
 {% endblock %}
 {% block listado %}

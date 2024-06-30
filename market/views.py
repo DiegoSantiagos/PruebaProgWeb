@@ -5,6 +5,7 @@ from tienda.settings import MEDIA_URL
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import  authenticate, login
 from django.contrib.auth.models import User
+from django.db.models import Sum
 # Create your views here.
 
 def registro_usuario(request): 
@@ -41,6 +42,11 @@ def listarProductos(request):
 def listarCarrito(request):
     listadoCarrito = Carrito.objects.filter(usuario=request.user)
     context = {'listadoCarrito': listadoCarrito}
+    totalPagar = sum(int(item.producto.precio) * item.cantidad for item in listadoCarrito)
+    totalProductos = Carrito.objects.filter(usuario=request.user).aggregate(Sum('cantidad'))['cantidad__sum']
+    context['totalProductos'] = totalProductos
+    context['totalPagar'] = totalPagar
+    
     return render(request, 'listarCarrito.html', context)
 
 def listarCategoria(request):
@@ -121,24 +127,26 @@ def anadirCarrito(request, pk):
             if 'btnAnadir' in request.POST:
                 usuario = request.user
                 producto = Productos.objects.get(pk=pk)
-                varCantidad = 'txtCantidad' + str(pk)
-                cantidad = int(request.POST.get(varCantidad, 1))
-                
+                varCantidad = int(request.POST.get('txtCantidad' + str(pk), 1))
                 carrito, creado = Carrito.objects.get_or_create(
                     producto=producto,
-                    defaults={'cantidad': cantidad},
+                    cantidad= varCantidad,
                     usuario = usuario
                 )
                 context['exito'] = 'Producto añadido al carrito correctamente'
                 
                 if not creado:
-                    carrito.cantidad += cantidad
+                    carrito.cantidad += varCantidad
                     carrito.save()
                     context['exito'] = 'Producto sumado al carrito correctamente'
     except Productos.DoesNotExist:
         context['error'] = 'El producto no existe'
-        
-    context = {'listadoCarrito': Carrito.objects.filter(usuario=request.user)}
+    listadoCarrito = Carrito.objects.filter(usuario=request.user)
+    context = {'listadoCarrito': listadoCarrito}
+    totalPagar = sum(int(item.producto.precio) * item.cantidad for item in listadoCarrito)
+    totalProductos = Carrito.objects.filter(usuario=request.user).aggregate(Sum('cantidad'))['cantidad__sum']
+    context['totalProductos'] = totalProductos
+    context['totalPagar'] = totalPagar
     return render(request, 'listarCarrito.html', context)
 
 def verProducto(request, pk):
@@ -216,5 +224,36 @@ def eliminarCarrito(request, pk):
         context['listadoCarrito'] = Carrito.objects.all()
     except:
         context['error'] = 'Error al eliminar el carrito'
-    context['listadoCarrito'] = Carrito.objects.filter(usuario=request.user)
+    listadoCarrito = Carrito.objects.filter(usuario=request.user)
+    context = {'listadoCarrito': listadoCarrito}
+    totalPagar = sum(int(item.producto.precio) * item.cantidad for item in listadoCarrito)
+    totalProductos = Carrito.objects.filter(usuario=request.user).aggregate(Sum('cantidad'))['cantidad__sum']
+    context['totalProductos'] = totalProductos
+    context['totalPagar'] = totalPagar
     return render(request, 'listarCarrito.html', context)
+
+@login_required
+def actualizarCarrito(request, pk):
+    context = {}
+    if request.method == 'POST':
+        try:
+            carrito = Carrito.objects.get(pk=pk)
+            cantidadFinal = int(request.POST.get('txtCantidad' + str(pk), 1))
+            if cantidadFinal < 1:
+                context['error'] = 'La cantidad no puede ser menor a 1'
+            elif cantidadFinal > carrito.producto.stock:
+                context['error'] = 'La cantidad no puede ser mayor al stock'
+            else:
+                carrito.cantidad = cantidadFinal
+                carrito.save()
+                context['exito'] = 'Carrito actualizado correctamente'
+        except:
+            context['error'] = 'Error al actualizar el carrito'
+    listadoCarrito = Carrito.objects.filter(usuario=request.user)
+    context = {'listadoCarrito': listadoCarrito}
+    totalPagar = sum(int(item.producto.precio) * item.cantidad for item in listadoCarrito)
+    totalProductos = Carrito.objects.filter(usuario=request.user).aggregate(Sum('cantidad'))['cantidad__sum']
+    context['totalProductos'] = totalProductos
+    context['totalPagar'] = totalPagar
+    return render(request, 'listarCarrito.html', context)
+    

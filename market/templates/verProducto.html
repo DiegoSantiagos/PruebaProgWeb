@@ -8,15 +8,18 @@
 {% block js %} {% endblock %}
 {% block tituloPrincipal %}{% endblock %}
 {% block mensaje %}
-{% if mensaje %}
-<div class="alert alert-success" role="alert">
-    {{ mensaje }}
-</div>
-{% elif error %}
-<div class="alert alert-danger" role="alert">
-    {{ error }}
-</div>
-{% endif %}
+    {% if exito %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{exito}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+    {% if error %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{error}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
 {% endblock %}
 {% block contenido %}
 
@@ -40,7 +43,7 @@
                     <div class="d-flex">
                         <form method="POST" action="{% url 'anadirCarrito' pk=item.id %}">
                             {% csrf_token %}
-                            <input class="form-control text-center me-3" id="txtCantidad{{item.id}}" type="num"
+                            <input class="form-control text-center me-3" name="txtCantidad{{item.id}}" type="number"
                                 value="1" style="max-width: 3rem" />
                             <button type="submit" name="btnAnadir" value="anadir"
                                 class="btn btn-outline-dark mt-auto">Añadir al
@@ -71,8 +74,8 @@
                     <div class="text-center">
                         <form method="POST" action="{% url 'anadirCarrito' pk=Producto.id %}">
                             {% csrf_token %}
-                            <input class="form-control text-center me-3" id="txtCantidad{{Producto.id}}" type="num"
-                                value="1" style="max-width: 3rem" />
+                            <input class="form-control text-center me-3" name="txtCantidad{{item.id}}" type="number"
+                                value="1" max="{{Producto.stock}}" style="max-width: 3rem" />
                             <button type="submit" name="btnAnadir" value="anadir"
                                 class="btn btn-outline-dark mt-auto">Añadir al
                                 Carrito</button>
