@@ -71,9 +71,10 @@
             </div>
             
         {% endfor %}
-        <div class=" justify-content-center">
+        <div class=" justify-content-center ">
             <span class="small mb-1">Total de productos: {{totalProductos}}</span>
-            <span class="small mb-1">Total: ${{totalPagar}}</span>
+            <p> </p>
+            Total: $<span class="small mb-1" id='precio'>{{totalPagar}}</span>
             <p> </p>
             <a href="{#% url 'realizarCompra' %#}" class="btn btn-primary">Realizar Compra</a>
         </div>

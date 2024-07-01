@@ -6,6 +6,11 @@
 {% endblock %}
 {% block js %} {% endblock %}
 {% block tituloPrincipal %} Productos {% endblock %}
+{% block boton %}
+{% if user.is_superuser %}
+<a class="btn btn-outline-success" href="{% url 'anadirProductoForm' %}">Añadir Producto</a>
+{% endif %}
+{% endblock %}
 {% block mensaje %}
     {% if exito %}
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -21,9 +26,6 @@
     {% endif %}
 {% endblock %}
 {% block contenido %}
-
-<a href="{% url 'anadirProductoForm' %}" class="btn btn-primary">Subir Producto</a>
-
 {% endblock %}
 {% block listado %}
 

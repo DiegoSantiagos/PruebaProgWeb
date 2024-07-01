@@ -1,0 +1,9 @@
+virtualenv venv 
+pip install django
+pip install crispy-bootstrap5
+pip install markdown
+pip install django-filter
+pip install django-crispy-forms
+pip install Pillow
+py manage.py runserver
+pip install djangorestframework

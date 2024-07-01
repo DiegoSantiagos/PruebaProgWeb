@@ -1,6 +1,11 @@
 {% extends "plantillaBase.html" %}
 {% block tituloPestana %} Listar Categorias {% endblock %}
 {% block tituloPrincipal %} Categoria {% endblock %}
+{% block boton %}
+{% if user.is_superuser %}
+<a class="btn btn-outline-success" href="{% url 'anadirCategoriaForm' %}">Añadir Categoria</a>
+{% endif %}
+{% endblock %}
 {% block mensaje    %}
     {% if exito %}
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -16,7 +21,6 @@
     {% endif %}
 {% endblock %}
 {% block contenido  %}
-    <a href="{% url 'anadirCategoriaForm' %}" class="btn btn-primary">Ingresar</a>
 {% endblock %}
 {% block listado    %}
     <table class="table table-responsive table-striped">

@@ -61,7 +61,7 @@
                     {% endif %}
                 
                     <a class="btn btn-outline-success" id="boton-clp-usd" onclick="cambiar()">CLP a USD</a>
-                    <a class="btn btn-outline-success" href="{% url 'anadirProductoForm' %}">Añadir Producto</a>
+                    {%block boton %} {% endblock %}
                 </div>
             </div>
         </nav>
