@@ -39,6 +39,7 @@ def listarProductos(request):
     context['MEDIA_URL'] = MEDIA_URL
     return render(request, 'listarProductos.html', context)
 
+@login_required
 def listarCarrito(request):
     listadoCarrito = Carrito.objects.filter(usuario=request.user)
     context = {'listadoCarrito': listadoCarrito}
@@ -55,29 +56,6 @@ def listarCategoria(request):
     return render(request, 'listarCategoria.html', context)
 
 @login_required
-def anadirProductoForm(request):
-    context = {'form': ProductoForm()}
-    if request.method == 'POST':
-        if 'btnGuardar' in request.POST:
-            item = None
-            if request.POST['txtId'] != '0':
-                item = Productos.objects.get(pk=request.POST['txtId'])
-            form = ProductoForm(request.POST, request.FILES, instance=item)
-            if form.is_valid():
-                form.save()
-                context['exito'] = 'Producto añadido correctamente'
-            else:
-                context['error'] = 'Error al guardar el producto'
-            context['listado'] = Productos.objects.all()
-            context['MEDIA_URL'] = MEDIA_URL
-        else:
-            context['listado'] = Productos.objects.all()
-            context['MEDIA_URL'] = MEDIA_URL
-    else:  # Añade este bloque para manejar las solicitudes GET
-        context['listado'] = Productos.objects.all()
-        context['MEDIA_URL'] = MEDIA_URL
-    return render(request, 'anadirProductoForm.html', context)
-
 def buscarCategoria(request, pk):
     context = {}
     try:
@@ -118,6 +96,29 @@ def editarProducto(request, pk):
         context['error'] = 'Error al buscar el registro'
     return render(request, 'anadirProductoForm.html', context)
 
+@login_required
+def anadirProductoForm(request):
+    context = {'form': ProductoForm()}
+    if request.method == 'POST':
+        if 'btnGuardar' in request.POST:
+            item = None
+            if request.POST['txtId'] != '0':
+                item = Productos.objects.get(pk=request.POST['txtId'])
+            form = ProductoForm(request.POST, request.FILES, instance=item)
+            if form.is_valid():
+                form.save()
+                context['exito'] = 'Producto añadido correctamente'
+            else:
+                context['error'] = 'Error al guardar el producto'
+            context['listado'] = Productos.objects.all()
+            context['MEDIA_URL'] = MEDIA_URL
+        else:
+            context['listado'] = Productos.objects.all()
+            context['MEDIA_URL'] = MEDIA_URL
+    else:  # Añade este bloque para manejar las solicitudes GET
+        context['listado'] = Productos.objects.all()
+        context['MEDIA_URL'] = MEDIA_URL
+    return render(request, 'anadirProductoForm.html', context)
 
 @login_required
 def anadirCarrito(request, pk):
@@ -250,10 +251,23 @@ def actualizarCarrito(request, pk):
         except:
             context['error'] = 'Error al actualizar el carrito'
     listadoCarrito = Carrito.objects.filter(usuario=request.user)
-    context = {'listadoCarrito': listadoCarrito}
     totalPagar = sum(int(item.producto.precio) * item.cantidad for item in listadoCarrito)
     totalProductos = Carrito.objects.filter(usuario=request.user).aggregate(Sum('cantidad'))['cantidad__sum']
-    context['totalProductos'] = totalProductos
-    context['totalPagar'] = totalPagar
+    # context = {'listadoCarrito': listadoCarrito}
+    # context['totalProductos'] = totalProductos
+    # context['totalPagar'] = totalPagar
+    context.update({
+        'listadoCarrito': listadoCarrito,
+        'totalProductos': totalProductos,
+        'totalPagar': totalPagar
+    })
     return render(request, 'listarCarrito.html', context)
+
+
+@login_required
+def realizarCompra(request):
+    context = {}
+    
+    return render(request, 'realizarCompra.html', context)  
+
     

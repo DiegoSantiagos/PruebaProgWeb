@@ -32,7 +32,6 @@
 <table class="table table-responsive table-striped">
     <div class="row row-cols-1 row-cols-md-4 g-4 cont-filt">
         {% for producto in listadoProductos %}
-        <div>
             <div class="col {{ producto.Categoria }} filterDiv show " id="{{ producto.Categoria }}">
                 <div class="card h-100">
                     <a href="{% url 'verProducto' producto.id %}" class="cartas">
@@ -70,9 +69,12 @@
                     <a href="{% url 'editarProducto' producto.id %}" class="btn carri btn-primary">editar producto</a>
                     <a href="{% url 'eliminarProducto' pk=producto.id %}" class="btn carri btn-primary">Eliminar Producto</a>
                     {% endif %}
+                    <div class="card-footer">
+                        <small class="text-body-secondary">Last updated {{producto.fecha_modificacion}} </small>
+                    </div>
                 </div>
+                
             </div>
-        </div>
         {% endfor %}
     </div>
 </table>

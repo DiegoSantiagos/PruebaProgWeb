@@ -1,0 +1,102 @@
+{% extends "plantillaBase.html" %}
+{% load static %}
+{% block tituloPestana %} realizar Compra {% endblock %}
+{% block tituloPrincipal %} Compra {% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static '../static/css/styleCarrito.css' %}"> 
+{% endblock %}
+{% block mensaje %}
+    {% if exito %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{exito}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+    {% if error %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{error}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+{% endblock %}
+{% block contenido  %}
+
+<form action="{#% url 'anadirMetidoPAgoForm' %#}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="hidden" name="txtId" value="0{{item.id}}">
+    <div class="row">
+        <div class="col-12 col-md-7 offset-md-3">
+            <table>
+                {{form.as_table}}
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-2 offset-md-3">Opciones</div>
+        <div class="col-12 col-md-5">
+            <input type="submit" name="btnGuardar" class="btn btn-danger" value="Guardar">
+            <input type="submit" name="btnLimpiar" class="btn btn-outline-secondary" value="Limpiar">
+            <a href="{#% url 'listarCategoria' %#}" class="btn btn-success">Listar</a>
+        </div>
+    </div>
+</form>
+
+<form action="{#% url 'anadirDireccionForm' %#}" method="POST">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-12 col-md-7 offset-md-3">
+            <table>
+                {{form.as_table}}
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-2 offset-md-3">Opciones</div>
+        <div class="col-12 col-md-5">
+            <input type="submit" name="btnGuardar" class="btn btn-danger" value="Guardar">
+            <input type="submit" name="btnLimpiar" class="btn btn-outline-secondary" value="Limpiar">
+            <a href="{#% url 'listarCategoria' %#}" class="btn btn-success">Listar</a>
+        </div>
+    </div>
+</form>
+
+    
+
+{% endblock %}
+{% block listado    %}
+
+    <table class="table table-responsive table-striped">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in listadoCarrito %}
+                <tr>
+                    <td>
+                        <img src="{{ item.producto.imagen.url }}" class="img-producto img-fluid rounded-start " alt="...">
+                        {{item.producto.nombre}}
+                    </td>
+                    <td>
+                        ${{item.producto.precio}}
+                    </td>
+                    <td>
+                        {{item.cantidad}}
+                    </td>
+                    <td>
+                        ${{item.subtotal}}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+
+    
+  
