@@ -166,11 +166,12 @@ class DireccionForm(forms.ModelForm):
 class MetodoPagoForm(forms.ModelForm):
     class Meta:
         model = MetodoPago
-        fields = ['nombre', 'numero','fecha_expiracion', 'cvv']
+        fields = ['nombre', 'numero','mesExpiracion','anioExpiracion' , 'cvv']
         labels = {
             'nombre': 'Nombre',
             'numero': 'Numero',
-            'fecha_expiracion': 'Fecha de expiracion',
+            'mesExpiracion': 'Mes de expiracion',
+            'anioExpiracion': 'Año de expiracion',
             'cvv': 'CVV'
         }
         widgets = {
@@ -185,9 +186,15 @@ class MetodoPagoForm(forms.ModelForm):
                 'max': '99999999999999999999',
                 'placeholder': 'Ingrese el numero de la tarjeta'
                 }),
-            'fecha_expiracion': forms.DateInput(attrs={
+            'mesExpiracion': forms.NumberInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Ingrese la fecha de expiracion'
+                'max': '12',
+                'min': '1'
+                }),
+            'anioExpiracion': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'min': '0',
+                'max': '99'
                 }),
             'cvv': forms.NumberInput(attrs={
                 'class': 'form-control',

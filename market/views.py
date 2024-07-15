@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Productos,Usuario,Compras,Carrito,Direccion,MetodoPago,Comentarios,Categoria
-from .forms import UsuarioForm , ProductoForm, CategoriaForm,CustomUserForm
+from .forms import UsuarioForm , ProductoForm, CategoriaForm,CustomUserForm, MetodoPagoForm, DireccionForm
 from tienda.settings import MEDIA_URL
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import  authenticate, login
@@ -266,8 +266,48 @@ def actualizarCarrito(request, pk):
 
 @login_required
 def realizarCompra(request):
-    context = {}
+    context = {'formPago': MetodoPagoForm() , 'formDireccion': DireccionForm()} 
     
+    try:
+        if request.method == 'POST':
+            if 'btnComprar' in request.POST:
+                usuario = request.user
+                direccion = Direccion()
+                direccion.direccion = request.POST.get('txtDireccion')
+                direccion.ciudad = request.POST.get('txtCiudad')
+                direccion.estado = request.POST.get('txtEstado')
+                direccion.pais = request.POST.get('txtPais')
+                direccion.codigo_postal = request.POST.get('txtCodigoPostal')
+                direccion.save()
+                
+                metodoPago = MetodoPago()
+                metodoPago.tarjeta = request.POST.get('txtTarjeta')
+                metodoPago.fecha_expiracion = request.POST.get('txtFechaExpiracion')
+                metodoPago.cvv = request.POST.get('txtCVV')
+                metodoPago.save()
+                
+                totalPagar = sum(int(item.producto.precio) * item.cantidad for item in Carrito.objects.filter(usuario=usuario))
+                
+                compra = Compras()
+                compra.usuario = usuario
+                compra.direccion = direccion
+                compra.metodoPago = metodoPago
+                compra.total = totalPagar
+                compra.save()
+                
+                for item in Carrito.objects.filter(usuario=usuario):
+                    compraDetalles = ComprasDetalle()
+                    compraDetalles.compra = compra
+                    compraDetalles.producto = item.producto
+                    compraDetalles.cantidad = item.cantidad
+                    compraDetalles.save()
+                    item.delete()
+                
+                context['exito'] = 'Compra realizada correctamente'
+    except:
+        context['error'] = 'Error al realizar la compra'
+    
+    context['listadoCarrito'] = Carrito.objects.filter(usuario=request.user)
     return render(request, 'realizarCompra.html', context)  
 
     
