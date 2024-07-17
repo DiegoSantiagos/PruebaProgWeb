@@ -6,6 +6,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import  authenticate, login
 from django.contrib.auth.models import User
 from django.db.models import Sum
+import logging
+logger = logging.getLogger(__name__)
+
 # Create your views here.
 
 def registro_usuario(request): 
@@ -50,6 +53,7 @@ def listarCarrito(request):
     
     return render(request, 'listarCarrito.html', context)
 
+@login_required
 def listarCategoria(request):
     listadoCategoria = Categoria.objects.all()
     context = {'listado': listadoCategoria}
@@ -305,34 +309,41 @@ def eliminarTarjeta(request, pk):
         context['listado'] = MetodoPago.objects.all()
     except:
         context['error'] = 'Error al eliminar la tarjeta'
-    context['listado'] = MetodoPago.objects.all()
-    return render(request, 'anadirTarjetaForm.html', context)
-
-@login_required
-def realizarCompra(request):
-    context = {'formPago': MetodoPagoForm() , 'formDireccion': DireccionForm()} 
-    
-    if request.method == 'POST':
-        try:
-            direccion = DireccionForm(request.POST)
-            pago = MetodoPagoForm(request.POST)
-            if direccion.is_valid() and pago.is_valid():
-                direccion = direccion.save()
-                pago = pago.save()
-                totalPagar = sum(int(item.producto.precio) * item.cantidad for item in Carrito.objects.filter(usuario=request.user))
-                compra = Compras(usuario=request.user, total=totalPagar, direccion=direccion, metodoPago=pago)
-                compra.save()
-                for item in Carrito.objects.filter(usuario=request.user):
-                    registro = registroCompras(usuario=request.user, producto=item.producto, cantidad=item.cantidad, total=(item.producto.precio * item.cantidad))
-                    registro.save()
-                    item.delete()
-                context['exito'] = 'Compra realizada correctamente'
-        except:
-            context['error'] = 'Error al realizar la compra'
     context['listadoDireccion'] = Direccion.objects.all()
     context['listadoTarjeta'] = MetodoPago.objects.all()
     context['listadoCarrito'] = Carrito.objects.filter(usuario=request.user)
-    return render(request, 'realizarCompra.html', context)  
+    return render(request, 'realizarCompra.html', context)
+
+@login_required
+def realizarCompra(request):
+    context = {}
+    if request.method == 'POST':
+        if 'btnComprar' in request.POST:
+            try:
+                direccion = Direccion.objects.get(pk=request.POST['direccion'])
+                tarjeta = MetodoPago.objects.get(pk=request.POST['tarjeta'])
+                carrito = Carrito.objects.filter(usuario=request.user)
+                totalPagar = sum(int(item.producto.precio) * item.cantidad for item in carrito)
+                for item in carrito:
+                    compra = Compras(
+                        producto=item.producto,
+                        cantidad=item.cantidad,
+                        total=totalPagar,
+                        direccion=direccion,
+                        metodo_pago=tarjeta
+                    )
+                    compra.save()
+                    item.producto.stock -= item.cantidad
+                    item.producto.save()
+                    item.delete()
+                context['exito'] = 'Compra realizada correctamente'
+            except Exception as e:
+                logger.error(f"Error al realizar la compra: {e}")
+                context['error'] = f"Error al realizar la compra: {e}"
+    context['listadoDireccion'] = Direccion.objects.all()
+    context['listadoTarjeta'] = MetodoPago.objects.all()
+    context['listadoCarrito'] = Carrito.objects.filter(usuario=request.user)
+    return render(request, 'realizarCompra.html', context)
 
 @login_required
 def anadirDireccionForm(request):
@@ -346,11 +357,13 @@ def anadirDireccionForm(request):
             if form.is_valid():
                 form.save()
                 context['exito'] = 'Direccion añadida correctamente'
+                return redirect('realizarCompra')  # Redirigir después de guardar
             else:
                 context['error'] = 'Error al guardar la direccion'
-            context['listadoDireccion'] = Direccion.objects.all()
-        else:
-            context['listadoDireccion'] = Direccion.objects.all()
+                context['form_errors'] = form.errors  # Agregar errores del formulario al contexto
+        context['listadoDireccion'] = Direccion.objects.all()
+    else:
+        context['listadoDireccion'] = Direccion.objects.all()
     return render(request, 'anadirDireccionForm.html', context)
 
 @login_required
@@ -375,5 +388,8 @@ def eliminarDireccion(request, pk):
     except:
         context['error'] = 'Error al eliminar la direccion'
     context['listado'] = Direccion.objects.all()
-    return render(request, 'anadirDireccionForm.html', context)
+    context['listadoDireccion'] = Direccion.objects.all()
+    context['listadoTarjeta'] = MetodoPago.objects.all()
+    context['listadoCarrito'] = Carrito.objects.filter(usuario=request.user)
+    return render(request, 'realizarCompra.html', context)
     

@@ -20,18 +20,23 @@
 {% endif %}
 {% endblock %}
 {% block contenido %}
-<section>
+<form action="{% url 'realizarCompra' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
     <h2>Seleccionar Direccion</h2>
     <table class="table table-responsive table-striped">
         <tr>
             <th>Direcciones</th>
+            <td>editar</td>
+            <td>eliminar</td>
         </tr>
+
+
 
         {% for item in listadoDireccion %}
         <tr>
             <th>
                 <label for="Direccion{{item.pk}}" class="direccion-label">
-                    <input type="radio" id="Direccion{{item.pk}}" name="direccion" value="{{item.pk}}">
+                    <input type="radio" id="Direccion{{item.pk}}" name="direccion" value="{{item.pk}}" required>
                     <span class="direccion-nombre">{{item.nombre}}</span>
                     <span class="direccion-direccion">{{item.direccion}}</span>
                     <span class="direccion-ciudad">{{item.ciudad}}</span>
@@ -39,13 +44,17 @@
                     <span class="direccion-codigoPostal">{{item.codigoPostal}}</span>
                 </label>
             </th>
-            <td><a href="{#% url 'editarDireccion' item.pk %#}" class="btn btn-warning">Editar</a></td>
-            <td><a href="{#% url 'eliminarDireccion' item.pk %#}" class="btn btn-danger">Eliminar</a></td>
+            <td><a href="{% url 'editarDireccion' item.pk %}" class="btn btn-warning">Editar</a></td>
+            <td><a href="{% url 'eliminarDireccion' item.pk %}" class="btn btn-danger">Eliminar</a></td>
         </tr>
         </tr>
         {% endfor %}
+        <tr>
+            <td>
+                <a href="{% url 'anadirDireccionForm' %}">añadir metodo de pago</a>
+            </td>
+        </tr>
     </table>
-    <a href="{% url 'anadirDireccionForm' %}">añadir metodo de pago</a>
 
     <h2>Seleccionar Tarjeta</h2>
     <table class="table table-responsive table-striped">
@@ -59,9 +68,9 @@
         <tr>
             <th>
                 <label for="Tarjeta{{item.pk}}" class="tarjeta-label">
-                    <input type="radio" id="Tarjeta{{item.pk}}" name="tarjeta" value="{{item.pk}}">
+                    <input type="radio" id="Tarjeta{{item.pk}}" name="tarjeta" value="{{item.pk}} " required>
                     <span class="tarjeta-nombre">{{item.nombre}}</span>
-                    <span class="tarjeta-numero">{{item.numero}}</span>
+                    <span class="tarjeta-numero">{{item.numero|slice:":4"}} **** **** ****</span>
                     <span class="tarjeta-expiracion">{{item.mesExpiracion}}/{{item.anioExpiracion}}</span>
                 </label>
             </th>
@@ -69,11 +78,14 @@
             <td><a href="{% url 'eliminarTarjeta' item.pk %}" class="btn btn-danger">Eliminar</a></td>
         </tr>
         {% endfor %}
+        <tr>
+            <td><a href="{% url 'anadirTarjetaForm' %}">añadir metodo de pago</a></td>
+        </tr>
+
     </table>
-    <a href="{% url 'anadirTarjetaForm' %}">añadir metodo de pago</a>
-</section>
-
-
+    <input type="submit" name="btnComprar" class="btn btn-success offset-md-9" value="Realizar Compra">
+</form>
+<br>
 
 {% endblock %}
 {% block listado %}

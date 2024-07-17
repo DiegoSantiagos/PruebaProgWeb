@@ -6,44 +6,53 @@
 {% endblock %}
 {% block tituloPrincipal %} Direccion {% endblock %}
 {% block mensaje %}
-{% if exito %}
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    {{exito}}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-{% endif %}
-{% if error %}
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    {{error}}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-{% endif %}
+    {% if exito %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{exito}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+    {% if error %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{error}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
 {% endblock %}
 {% block contenido %}
-
+{% if form_errors %}
+    <div class="alert alert-danger">
+        <ul>
+            {% for field, errors in form_errors.items %}
+                {% for error in errors %}
+                    <li>{{ field }}: {{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
 <form action="{% url 'anadirDireccionForm' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <input type="hidden" name="txtId" value="0{{item.id}}">
     <div class="row">
         <div class="col-12 col-md-7 offset-md-3">
-            <table>
-
-                <div class="form-group">
-
-                    <label for="direccion">Direccion</label>
-                    {{ form.direccion }}
-
-                    <label for="ciudad">Ciudad</label>
-                    {{ form.ciudad }}
-
-                    <label for="estado">Estado</label>
-                    {{ form.estado }}
-
-                    <label for="codigoPostal">Codigo Postal</label>
-                    {{ form.codigo_postal }}
-                </div>
-            </table>
-
+            <div class="form-group">
+                <label for="direccion">Direccion</label>
+                {{ form.direccion.errors }}
+                {{ form.direccion }}
+                <label for="ciudad">Ciudad</label>
+                {{ form.ciudad.errors }}
+                {{ form.ciudad }}
+                <label for="estado">Comuna</label>
+                {{ form.estado.errors }}
+                {{ form.estado }}
+                <label for="pais">pais</label>
+                {{ form.pais.errors }}
+                {{ form.pais }}
+                <label for="codigo_Postal">Codigo Postal</label>
+                {{ form.codigo_postal.errors }}
+                {{ form.codigo_postal }}
+            </div>
         </div>
     </div>
     <div class="row">

@@ -132,7 +132,7 @@ class DireccionForm(forms.ModelForm):
         labels = {
             'direccion': 'Direccion',
             'ciudad': 'Ciudad',
-            'estado': 'Estado',
+            'estado': 'Comuna',
             'pais': 'Pais',
             'codigo_postal': 'Codigo postal'
         }
@@ -149,7 +149,7 @@ class DireccionForm(forms.ModelForm):
 
             'estado': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Ingrese su estado'
+                'placeholder': 'Ingrese su comuna'
                 }),
 
             'pais': forms.TextInput(attrs={
