@@ -157,8 +157,11 @@ class DireccionForm(forms.ModelForm):
                 'placeholder': 'Ingrese su pais'
                 }),
 
-            'codigo_postal': forms.NumberInput(attrs={
+            'codigo_postal': forms.TextInput(attrs={
                 'class': 'form-control',
+                'id': 'codigo_postal',
+                'min': '0',
+                'max': '9999999999',
                 'placeholder': 'Ingrese su codigo postal'
                 })
         }
@@ -166,34 +169,41 @@ class DireccionForm(forms.ModelForm):
 class MetodoPagoForm(forms.ModelForm):
     class Meta:
         model = MetodoPago
-        fields = ['nombre', 'numero','fecha_expiracion', 'cvv']
+        fields = ['nombre', 'numero', 'mesExpiracion', 'anioExpiracion', 'cvv']
         labels = {
             'nombre': 'Nombre',
             'numero': 'Numero',
-            'fecha_expiracion': 'Fecha de expiracion',
+            'mesExpiracion': 'Fecha de expiracion',
+            'anioExpiracion': '',
             'cvv': 'CVV'
         }
         widgets = {
             'nombre': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Ingrese el nombre del metodo de pago'
+                'placeholder': 'Ingrese el nombre'
                 }),
 
-            'numero': forms.NumberInput(attrs={
+            'numero': forms.TextInput(attrs={
                 'class': 'form-control',
+                'id': 'numero',
                 'min': '0',
-                'max': '99999999999999999999',
+                'max': '9999999999999999',
                 'placeholder': 'Ingrese el numero de la tarjeta'
                 }),
-            'fecha_expiracion': forms.DateInput(attrs={
+            
+            'mesExpiracion': forms.Select(choices=[(i, i) for i in range(1, 13)], attrs={
                 'class': 'form-control',
-                'placeholder': 'Ingrese la fecha de expiracion',
-                'type': 'month'
+                'placeholder': 'Ingrese el mes de expiracion'
             }),
-            'cvv': forms.NumberInput(attrs={
+            'anioExpiracion': forms.Select(choices=[(i, i) for i in range(24, 40)], attrs={
                 'class': 'form-control',
+                'placeholder': 'Ingrese el mes de expiracion'
+            }),
+            'cvv': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'cvv',
                 'min': '100',
                 'max': '999',
-                'placeholder': 'Ingrese el CVV'
+                'placeholder': 'CVV'
                 })
         }

@@ -277,9 +277,11 @@ def anadirTarjetaForm(request):
                 context['exito'] = 'Tarjeta añadida correctamente'
             else:
                 context['error'] = 'Error al guardar la tarjeta'
-            context['listado'] = MetodoPago.objects.all()
+            context['listadoTarjeta'] = MetodoPago.objects.all()
         else:
-            context['listado'] = MetodoPago.objects.all()
+            context['listadoTarjeta'] = MetodoPago.objects.all()
+    context['meses'] = range(1, 13)
+    context['anios'] = range(24, 41)
     return render(request, 'anadirTarjetaForm.html', context)
 
 @login_required
@@ -327,9 +329,51 @@ def realizarCompra(request):
                 context['exito'] = 'Compra realizada correctamente'
         except:
             context['error'] = 'Error al realizar la compra'
+    context['listadoDireccion'] = Direccion.objects.all()
     context['listadoTarjeta'] = MetodoPago.objects.all()
     context['listadoCarrito'] = Carrito.objects.filter(usuario=request.user)
     return render(request, 'realizarCompra.html', context)  
 
+@login_required
+def anadirDireccionForm(request):
+    context = {'form': DireccionForm()}
+    if request.method == 'POST':
+        if 'btnGuardar' in request.POST:
+            item = None
+            if request.POST['txtId'] != '0':
+                item = Direccion.objects.get(pk=request.POST['txtId'])
+            form = DireccionForm(request.POST, instance=item)
+            if form.is_valid():
+                form.save()
+                context['exito'] = 'Direccion añadida correctamente'
+            else:
+                context['error'] = 'Error al guardar la direccion'
+            context['listadoDireccion'] = Direccion.objects.all()
+        else:
+            context['listadoDireccion'] = Direccion.objects.all()
+    return render(request, 'anadirDireccionForm.html', context)
 
+@login_required
+def editarDireccion(request, pk):
+    context = {}
+    try:
+        item = Direccion.objects.get(pk=pk)
+        context['item'] = item
+        context['form'] = DireccionForm(instance=item)
+    except:
+        context['error'] = 'Error al buscar el registro'
+    return render(request, 'anadirDireccionForm.html', context)
+
+@login_required
+def eliminarDireccion(request, pk):
+    context = {}
+    try:
+        direccion = Direccion.objects.get(pk=pk)
+        direccion.delete()
+        context['exito'] = 'Direccion eliminada correctamente'
+        context['listado'] = Direccion.objects.all()
+    except:
+        context['error'] = 'Error al eliminar la direccion'
+    context['listado'] = Direccion.objects.all()
+    return render(request, 'anadirDireccionForm.html', context)
     

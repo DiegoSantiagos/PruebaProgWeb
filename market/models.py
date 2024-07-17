@@ -78,7 +78,8 @@ class Direccion(models.Model):
 class MetodoPago(models.Model):
     nombre = models.CharField(max_length=50)
     numero = models.CharField(max_length=20)
-    fecha_expiracion = models.DateField()
+    mesExpiracion = models.CharField(max_length=2)
+    anioExpiracion = models.CharField(max_length=2)
     cvv = models.CharField(max_length=3)
     fecha_modificacion = models.DateTimeField(auto_now=True)
 

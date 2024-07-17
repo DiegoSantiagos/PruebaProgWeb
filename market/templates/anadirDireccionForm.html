@@ -1,10 +1,10 @@
 {% extends "plantillaBase.html" %}
 {% load static %}
-{% block tituloPestana %} Añadir Tarjeta {% endblock %}
+{% block tituloPestana %} Añadir Direccion {% endblock %}
 {% block css %}{% endblock %}
 {% block js %}
 {% endblock %}
-{% block tituloPrincipal %} Tarjeta {% endblock %}
+{% block tituloPrincipal %} Direccion {% endblock %}
 {% block mensaje %}
 {% if exito %}
 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -21,7 +21,7 @@
 {% endblock %}
 {% block contenido %}
 
-<form action="{% url 'anadirTarjetaForm' %}" method="post" enctype="multipart/form-data">
+<form action="{% url 'anadirDireccionForm' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <input type="hidden" name="txtId" value="0{{item.id}}">
     <div class="row">
@@ -29,26 +29,18 @@
             <table>
 
                 <div class="form-group">
-                    <label for="nombre">Nombre</label>
-                    {{ form.nombre }}
 
-                    <label for="numeroTarjeta">Número de Tarjeta</label>
-                    {{ form.numero }}
-                    <span id="resultadoValidacion"></span>
-                    <br>
-                    <label for="mesExpiracion">Fecha de Expiración</label>
-                    <section class="d-flex">
-                        <div class="mr-2">
-                            {{ form.mesExpiracion }}
-                        </div>
-                        <div>
-                            {{ form.anioExpiracion }}
-                        </div>
-                    </section>
+                    <label for="direccion">Direccion</label>
+                    {{ form.direccion }}
 
-                    <label for="cvv">CVV</label>
-                    {{ form.cvv }}
+                    <label for="ciudad">Ciudad</label>
+                    {{ form.ciudad }}
 
+                    <label for="estado">Estado</label>
+                    {{ form.estado }}
+
+                    <label for="codigoPostal">Codigo Postal</label>
+                    {{ form.codigo_postal }}
                 </div>
             </table>
 
@@ -64,7 +56,7 @@
     </div>
 </form>
 
-<script src="{% static '/js/tarjetaForm.js' %}"></script>
+<script src="{% static '/js/DireccionForm.js' %}"></script>
 {% endblock %}
 {% block listado %}
 {% endblock %}

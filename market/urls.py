@@ -25,4 +25,7 @@ urlpatterns = [
     path('anadirTarjetaForm', views.anadirTarjetaForm, name='anadirTarjetaForm'),
     path('editarTarjeta/<int:pk>', views.editarTarjeta, name='editarTarjeta'),
     path('eliminarTarjeta/<int:pk>', views.eliminarTarjeta, name='eliminarTarjeta'),
+    path('anadirDireccionForm', views.anadirDireccionForm, name='anadirDireccionForm'),
+    path('editarDireccion/<int:pk>', views.editarDireccion, name='editarDireccion'),
+    path('eliminarDireccion/<int:pk>', views.eliminarDireccion, name='eliminarDireccion'),
 ]
