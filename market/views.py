@@ -408,3 +408,60 @@ def eliminarDireccion(request, pk):
     context['listadoCarrito'] = Carrito.objects.filter(usuario=request.user)
     return render(request, 'realizarCompra.html', context)
     
+    
+@login_required
+@user_passes_test(is_superuser, login_url='/market/')
+def anadirProductoNoForm(request):
+    context = {}
+    context['Categoria'] = Categoria.objects.all()
+    if request.method == 'POST':
+        txtId = request.POST.get('txtId')
+        nombre = request.POST.get('txtNombre').strip()
+        precio = request.POST.get('txtPrecio').strip()
+        descripcion = request.POST.get('txtDescripcion').strip()
+        categoria = Categoria.objects.get(pk='cmbCategoria')
+        foto = request.FILES.get('txtFoto')
+
+        if not nombre:
+            context['error'] = 'El nombre es obligatorio'
+        elif not precio or not precio.isdigit():
+            context['error'] = 'El precio es obligatorio y debe ser un número'
+        elif not descripcion:
+            context['error'] = 'La descripción es obligatoria'
+        elif categoria == None:
+            context['error'] = 'La categoría es obligatoria'
+        else:
+            try:
+                idCategoria = int(idCategoria)  # Convertir idCategoria a entero
+                categoria = Categoria.objects.get(pk=idCategoria)
+                if txtId == '0':
+                    producto = Productos(
+                        nombre=nombre,
+                        precio=precio,
+                        descripcion=descripcion,
+                        Categoria=categoria
+                    )
+                    if foto:
+                        producto.imagen = foto
+                    producto.save()
+                    context['exito'] = 'Producto creado correctamente'
+                else:
+                    producto = Productos.objects.get(pk=txtId)
+                    producto.nombre = nombre
+                    producto.precio = precio
+                    producto.descripcion = descripcion
+                    producto.Categoria = categoria
+                    if foto:
+                        producto.imagen = foto
+                    producto.save()
+                    context['exito'] = 'Producto actualizado correctamente'
+            except Categoria.DoesNotExist:
+                context['error'] = 'La categoría no existe'
+            except Productos.DoesNotExist:
+                context['error'] = 'El producto no existe'
+            except Exception as e:
+                context['error'] = f'Error al crear/actualizar producto: {e}'
+
+    context['listadoCategoria'] = Categoria.objects.all()
+    context['MEDIA_URL'] = MEDIA_URL
+    return render(request, 'anadirProductoNoForm.html', context)

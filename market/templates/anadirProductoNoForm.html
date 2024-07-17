@@ -1,0 +1,68 @@
+{% extends "plantillaBase.html" %}
+{% load static %}
+{% block tituloPestana %} añadir producto {% endblock %}
+{% block tituloPrincipal %} Añadir Producto {% endblock %}
+{% block css %}
+{% endblock %}
+{% block mensaje %}
+{% if exito %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{exito}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+{% if error %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{error}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+{% endblock %}
+{% block contenido %}
+<form action="{% url 'anadirProductoNoForm' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="hidden" name="txtId" value="0{{item.id}}">
+    <div class="col-md-5 offset-md-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="txtNombre" name="txtNombre" placeholder="Ingresar Nombre" required>
+    </div>
+    <div class="col-md-5 offset-md-3">
+        <label for="descripcion" class="form-label">Descripcion</label>
+        <input type="text" class="form-control" id="txtDescripcion" name="txtDescripcion"
+            placeholder="Ingresar Descripcion " required>
+    </div>
+    <div class="col-md-5 offset-md-3">
+        <label for="precio" class="form-label">Precio</label>
+        <input type="number" class="form-control" id="txtPrecio" name="txtPrecio" placeholder="Ingresar Precio"
+            required>
+    </div>
+    <div class="col-md-5 offset-md-3">
+        <label for="stock" class="form-label">Stock</label>
+        <input type="number" class="form-control" id="txtStock" name="txtStock" placeholder="Ingresar stock" required>
+    </div>
+    <div class="col-md-5 offset-md-3">
+        <label for="categoria" class="form-label">Categoria</label>
+        <select class="form-select" id="cmbCategoria" name="cmbCategoria">
+            <option value="">Seleccionar Categoria</option>
+            {% for categoria in listadoCategoria %}
+            <option value="{{categorias.pk}}">{{categoria.pk}} {{categoria.nombre}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-md-5 offset-md-3">
+        <label for="imagen" class="form-label">Imagen</label>
+        <input type="file" class="form-control" id="imagen" name="txtImagen" required>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12 col-md-2 offset-md-3">Opciones</div>
+        <div class="col-12 col-md-5">
+            <input type="submit" name="btnGuardar" class="btn btn-danger" value="Guardar">
+            <input type="submit" name="btnLimpiar" class="btn btn-outline-secondary" value="Limpiar">
+            <a href="{% url 'listarProductos' %}" class="btn btn-success">listar</a>
+        </div>
+    </div>
+
+    <script src="{% static '../static/js/anadirproductonoform.js' %}"></script>
+</form>
+{% endblock %}
+{% block listado %}{% endblock %}

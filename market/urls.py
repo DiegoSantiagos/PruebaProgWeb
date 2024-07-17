@@ -28,4 +28,5 @@ urlpatterns = [
     path('anadirDireccionForm', views.anadirDireccionForm, name='anadirDireccionForm'),
     path('editarDireccion/<int:pk>', views.editarDireccion, name='editarDireccion'),
     path('eliminarDireccion/<int:pk>', views.eliminarDireccion, name='eliminarDireccion'),
+    path('anadirProductoNoForm', views.anadirProductoNoForm, name='anadirProductoNoForm'),
 ]
