@@ -20,43 +20,20 @@
 {% endif %}
 {% endblock %}
 {% block contenido %}
+<section>
+    <h2>Seleccionar Direccion</h2>
+    asdk;dlkal;dakl;
 
-<form class="" action="{#% url 'anadirMetidoPAgoForm' %#}" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <input type="hidden" name="txtId" value="0{{item.id}}">
-    <div class="row">
-        <div class="col-12 col-md-7 offset-md-3">
-            <table>
-                {{formDireccion.as_table}}
-            </table>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12 col-md-2 offset-md-3">Opciones</div>
-        <div class="col-12 col-md-5">
-            <input type="submit" name="btnMetPAgo" class="btn btn-danger" value="Guardar">
-            <input type="submit" name="btnLimpiar" class="btn btn-outline-secondary" value="Limpiar">
-        </div>
-    </div>
-</form>
+    <h2>Seleccionar Tarjeta</h2>
+    {% for item in listadoTarjetas %}
+    <input type="radio" id="{{item.pk}}" name="tarjeta" value="{{item.pk}}">
+    <label for="{{item.pk}}">
+        <p>{{item.numeroTarjeta}}</p>
+    </label>
+    {% endfor %}
 
-<form action="{#% url 'anadirDireccionForm' %#}" method="POST">
-    {% csrf_token %}
-    <div class="row">
-        <div class="col-12 col-md-7 offset-md-3">
-            <table>
-                {{formPago.as_table}}
-            </table>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12 col-md-2 offset-md-3">Opciones</div>
-        <div class="col-12 col-md-5">
-            <input type="submit" name="btnDirec" class="btn btn-danger" value="Guardar">
-            <input type="submit" name="btnLimpiar" class="btn btn-outline-secondary" value="Limpiar">
-        </div>
-    </div>
-</form>
+    <a href="{% url 'anadirTarjetaForm' %}">añadir metodo de pago</a>
+</section>
 
 
 

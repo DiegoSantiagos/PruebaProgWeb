@@ -263,51 +263,73 @@ def actualizarCarrito(request, pk):
     })
     return render(request, 'listarCarrito.html', context)
 
+@login_required
+def anadirTarjetaForm(request):
+    context = {'form': MetodoPagoForm()}
+    if request.method == 'POST':
+        if 'btnGuardar' in request.POST:
+            item = None
+            if request.POST['txtId'] != '0':
+                item = MetodoPago.objects.get(pk=request.POST['txtId'])
+            form = MetodoPagoForm(request.POST, instance=item)
+            if form.is_valid():
+                form.save()
+                context['exito'] = 'Tarjeta añadida correctamente'
+            else:
+                context['error'] = 'Error al guardar la tarjeta'
+            context['listado'] = MetodoPago.objects.all()
+        else:
+            context['listado'] = MetodoPago.objects.all()
+    return render(request, 'anadirTarjetaForm.html', context)
+
+@login_required
+def editarTarjeta(request, pk):
+    context = {}
+    try:
+        item = MetodoPago.objects.get(pk=pk)
+        context['item'] = item
+        context['form'] = MetodoPagoForm(instance=item)
+    except:
+        context['error'] = 'Error al buscar el registro'
+    return render(request, 'anadirTarjetaForm.html', context)
+
+@login_required
+def eliminarTarjeta(request, pk):
+    context = {}
+    try:
+        tarjeta = MetodoPago.objects.get(pk=pk)
+        tarjeta.delete()
+        context['exito'] = 'Tarjeta eliminada correctamente'
+        context['listado'] = MetodoPago.objects.all()
+    except:
+        context['error'] = 'Error al eliminar la tarjeta'
+    context['listado'] = MetodoPago.objects.all()
+    return render(request, 'anadirTarjetaForm.html', context)
 
 @login_required
 def realizarCompra(request):
     context = {'formPago': MetodoPagoForm() , 'formDireccion': DireccionForm()} 
     
-    try:
-        if request.method == 'POST':
-            if 'btnComprar' in request.POST:
-                usuario = request.user
-                direccion = Direccion()
-                direccion.direccion = request.POST.get('txtDireccion')
-                direccion.ciudad = request.POST.get('txtCiudad')
-                direccion.estado = request.POST.get('txtEstado')
-                direccion.pais = request.POST.get('txtPais')
-                direccion.codigo_postal = request.POST.get('txtCodigoPostal')
-                direccion.save()
-                
-                metodoPago = MetodoPago()
-                metodoPago.tarjeta = request.POST.get('txtTarjeta')
-                metodoPago.fecha_expiracion = request.POST.get('txtFechaExpiracion')
-                metodoPago.cvv = request.POST.get('txtCVV')
-                metodoPago.save()
-                
-                totalPagar = sum(int(item.producto.precio) * item.cantidad for item in Carrito.objects.filter(usuario=usuario))
-                
-                compra = Compras()
-                compra.usuario = usuario
-                compra.direccion = direccion
-                compra.metodoPago = metodoPago
-                compra.total = totalPagar
+    if request.method == 'POST':
+        try:
+            direccion = DireccionForm(request.POST)
+            pago = MetodoPagoForm(request.POST)
+            if direccion.is_valid() and pago.is_valid():
+                direccion = direccion.save()
+                pago = pago.save()
+                totalPagar = sum(int(item.producto.precio) * item.cantidad for item in Carrito.objects.filter(usuario=request.user))
+                compra = Compras(usuario=request.user, total=totalPagar, direccion=direccion, metodoPago=pago)
                 compra.save()
-                
-                for item in Carrito.objects.filter(usuario=usuario):
-                    compraDetalles = ComprasDetalle()
-                    compraDetalles.compra = compra
-                    compraDetalles.producto = item.producto
-                    compraDetalles.cantidad = item.cantidad
-                    compraDetalles.save()
+                for item in Carrito.objects.filter(usuario=request.user):
+                    registro = registroCompras(usuario=request.user, producto=item.producto, cantidad=item.cantidad, total=(item.producto.precio * item.cantidad))
+                    registro.save()
                     item.delete()
-                
                 context['exito'] = 'Compra realizada correctamente'
-    except:
-        context['error'] = 'Error al realizar la compra'
-    
+        except:
+            context['error'] = 'Error al realizar la compra'
+    context['listadoTarjeta'] = MetodoPago.objects.all()
     context['listadoCarrito'] = Carrito.objects.filter(usuario=request.user)
     return render(request, 'realizarCompra.html', context)  
+
 
     

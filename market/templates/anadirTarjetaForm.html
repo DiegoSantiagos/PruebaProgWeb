@@ -1,0 +1,31 @@
+{% extends "plantillaBase.html" %}
+{% block tituloPestana %} Añadir Tarjeta {% endblock %}
+{% block css %}{% endblock %}
+{% block js %} {% endblock %}
+{% block tituloPrincipal %} Tarjeta {% endblock %}
+{% block mensaje %}
+{% endblock %}
+{% block contenido %}
+
+<form action="{% url 'anadirTarjetaForm' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="hidden" name="txtId" value="0{{item.id}}">
+    <div class="row">
+        <div class="col-12 col-md-7 offset-md-3">
+            <table>
+                {{form.as_table}}
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-2 offset-md-3">Opciones</div>
+        <div class="col-12 col-md-5">
+            <input type="submit" name="btnGuardar" class="btn btn-danger" value="Guardar">
+            <input type="submit" name="btnLimpiar" class="btn btn-outline-secondary" value="Limpiar">
+            <a href="{% url 'realizarCompra' %}" class="btn btn-success">Volver</a>
+        </div>
+    </div>
+</form>
+{% endblock %}
+{% block listado %}
+{% endblock %}

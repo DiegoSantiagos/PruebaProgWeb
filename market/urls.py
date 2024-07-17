@@ -22,4 +22,7 @@ urlpatterns = [
     path('registrar/', views.registro_usuario, name="registrar"),
     path('actualizarCarrito/<int:pk>', views.actualizarCarrito, name='actualizarCarrito'),
     path('realizarCompra', views.realizarCompra, name='realizarCompra'),
+    path('anadirTarjetaForm', views.anadirTarjetaForm, name='anadirTarjetaForm'),
+    path('editarTarjeta/<int:pk>', views.editarTarjeta, name='editarTarjeta'),
+    path('eliminarTarjeta/<int:pk>', views.eliminarTarjeta, name='eliminarTarjeta'),
 ]
