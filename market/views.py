@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Productos,Usuario,Compras,Carrito,Direccion,MetodoPago,Comentarios,Categoria
 from .forms import UsuarioForm , ProductoForm, CategoriaForm,CustomUserForm, MetodoPagoForm, DireccionForm
 from tienda.settings import MEDIA_URL
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required,user_passes_test
 from django.contrib.auth import  authenticate, login
 from django.contrib.auth.models import User
 from django.db.models import Sum
@@ -26,11 +26,13 @@ def registro_usuario(request):
         data ["form"] = formulario
     return render (request, 'registrar.html' , data )
 
+def is_superuser(user):
+    return user.is_superuser
 
 def menu(request):
     return render(request, 'plantillaBase.html', {})
 
-def index(request):  #obtiene los productos de la base
+def index(request): 
     productos = Productos.objects.filter(stock__gt=0).order_by('?')[:3]
     context = {'productos': productos}
     context['MEDIA_URL'] = MEDIA_URL
@@ -54,12 +56,14 @@ def listarCarrito(request):
     return render(request, 'listarCarrito.html', context)
 
 @login_required
+@user_passes_test(is_superuser, login_url='/market/')
 def listarCategoria(request):
     listadoCategoria = Categoria.objects.all()
     context = {'listado': listadoCategoria}
     return render(request, 'listarCategoria.html', context)
 
 @login_required
+@user_passes_test(is_superuser, login_url='/market/')
 def buscarCategoria(request, pk):
     context = {}
     try:
@@ -71,6 +75,7 @@ def buscarCategoria(request, pk):
     return render(request, 'guardarEscuela.html', context)
 
 @login_required
+@user_passes_test(is_superuser, login_url='/market/')
 def anadirCategoriaForm(request):
     context = {'form': CategoriaForm()}
     if request.method == 'POST':
@@ -90,6 +95,7 @@ def anadirCategoriaForm(request):
     return render(request, 'anadirCategoriaForm.html', context)
 
 @login_required
+@user_passes_test(is_superuser, login_url='/market/')
 def editarProducto(request, pk):
     context = {}
     try:
@@ -101,6 +107,7 @@ def editarProducto(request, pk):
     return render(request, 'anadirProductoForm.html', context)
 
 @login_required
+@user_passes_test(is_superuser, login_url='/market/')
 def anadirProductoForm(request):
     context = {'form': ProductoForm()}
     if request.method == 'POST':
@@ -123,6 +130,8 @@ def anadirProductoForm(request):
         context['listado'] = Productos.objects.all()
         context['MEDIA_URL'] = MEDIA_URL
     return render(request, 'anadirProductoForm.html', context)
+
+
 
 @login_required
 def anadirCarrito(request, pk):
@@ -170,6 +179,7 @@ def verProducto(request, pk):
     return render(request, 'verProducto.html', context)
 
 @login_required
+@user_passes_test(is_superuser, login_url='/market/')
 def editarProducto(request, pk):
     context = {}
     try:
@@ -181,6 +191,7 @@ def editarProducto(request, pk):
     return render(request, 'anadirProductoForm.html', context)
 
 @login_required
+@user_passes_test(is_superuser, login_url='/market/')
 def eliminarProducto(request, pk):
     context = {}
     try:
@@ -196,6 +207,7 @@ def eliminarProducto(request, pk):
     return render(request, 'listarProductos.html', context)
 
 @login_required
+@user_passes_test(is_superuser, login_url='/market/')
 def eliminarCategoria(request, pk):
     context = {}
     try:
@@ -209,6 +221,7 @@ def eliminarCategoria(request, pk):
     return render(request, 'listarCategoria.html', context)
 
 @login_required
+@user_passes_test(is_superuser, login_url='/market/')
 def editarCategoria(request, pk):
     context = {}
     try:
@@ -277,13 +290,15 @@ def anadirTarjetaForm(request):
                 item = MetodoPago.objects.get(pk=request.POST['txtId'])
             form = MetodoPagoForm(request.POST, instance=item)
             if form.is_valid():
+                metodoPago = form.save(commit=False)
+                metodoPago.usuario = request.user
                 form.save()
                 context['exito'] = 'Tarjeta añadida correctamente'
             else:
                 context['error'] = 'Error al guardar la tarjeta'
-            context['listadoTarjeta'] = MetodoPago.objects.all()
+            context['listadoTarjeta'] = MetodoPago.objects.filter(usuario=request.user)
         else:
-            context['listadoTarjeta'] = MetodoPago.objects.all()
+            context['listadoTarjeta'] = MetodoPago.objects.filter(usuario=request.user)
     context['meses'] = range(1, 13)
     context['anios'] = range(24, 41)
     return render(request, 'anadirTarjetaForm.html', context)
@@ -309,8 +324,8 @@ def eliminarTarjeta(request, pk):
         context['listado'] = MetodoPago.objects.all()
     except:
         context['error'] = 'Error al eliminar la tarjeta'
-    context['listadoDireccion'] = Direccion.objects.all()
-    context['listadoTarjeta'] = MetodoPago.objects.all()
+    context['listadoDireccion'] = Direccion.objects.filter(usuario=request.user)
+    context['listadoTarjeta'] = MetodoPago.objects.filter(usuario=request.user)
     context['listadoCarrito'] = Carrito.objects.filter(usuario=request.user)
     return render(request, 'realizarCompra.html', context)
 
@@ -326,6 +341,7 @@ def realizarCompra(request):
                 totalPagar = sum(int(item.producto.precio) * item.cantidad for item in carrito)
                 for item in carrito:
                     compra = Compras(
+                        usuario=request.user,  # Asignar el usuario actual
                         producto=item.producto,
                         cantidad=item.cantidad,
                         total=totalPagar,
@@ -344,7 +360,6 @@ def realizarCompra(request):
     context['listadoTarjeta'] = MetodoPago.objects.all()
     context['listadoCarrito'] = Carrito.objects.filter(usuario=request.user)
     return render(request, 'realizarCompra.html', context)
-
 @login_required
 def anadirDireccionForm(request):
     context = {'form': DireccionForm()}
@@ -355,15 +370,15 @@ def anadirDireccionForm(request):
                 item = Direccion.objects.get(pk=request.POST['txtId'])
             form = DireccionForm(request.POST, instance=item)
             if form.is_valid():
-                form.save()
+                direccion = form.save(commit=False)
+                direccion.usuario = request.user
+                direccion.save()
                 context['exito'] = 'Direccion añadida correctamente'
-                return redirect('realizarCompra')  # Redirigir después de guardar
             else:
                 context['error'] = 'Error al guardar la direccion'
-                context['form_errors'] = form.errors  # Agregar errores del formulario al contexto
-        context['listadoDireccion'] = Direccion.objects.all()
+        context['listadoDireccion'] = Direccion.objects.filter(usuario=request.user)
     else:
-        context['listadoDireccion'] = Direccion.objects.all()
+        context['listadoDireccion'] = Direccion.objects.filter(usuario=request.user)
     return render(request, 'anadirDireccionForm.html', context)
 
 @login_required

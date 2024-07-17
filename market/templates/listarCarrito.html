@@ -76,7 +76,9 @@
             <p> </p>
             Total: $<span class="small mb-1" id='precio'>{{totalPagar}}</span>
             <p> </p>
+            {% if totalProductos > 0 %}
             <a href="{% url 'realizarCompra' %}" class="btn btn-primary">Realizar Compra</a>
+            {% endif %}
         </div>
     </table>
 

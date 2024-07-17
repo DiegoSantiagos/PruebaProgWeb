@@ -50,11 +50,13 @@ class Direccion(models.Model):
     pais = models.CharField(max_length=50)
     codigo_postal = models.CharField(max_length=10)
     fecha_modificacion = models.DateTimeField(auto_now=True)
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.direccion + ' ' + self.ciudad + ' ' + self.estado + ' ' + self.pais + ' ' + self.codigo_postal
     
 class MetodoPago(models.Model):
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=50)
     numero = models.CharField(max_length=20)
     mesExpiracion = models.CharField(max_length=2)
@@ -93,8 +95,15 @@ class registroCompras(models.Model):
     cantidad = models.IntegerField()
     total = models.DecimalField(max_digits=10, decimal_places=2)
     fecha_compra = models.DateTimeField(auto_now_add=True)
-    direccion = models.ForeignKey('Direccion', on_delete=models.CASCADE)
-    metodo_pago = models.ForeignKey('MetodoPago', on_delete=models.CASCADE)
+    direccion = models.ForeignKey(Direccion, on_delete=models.CASCADE)
+    metodo_pago = models.ForeignKey(MetodoPago, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.usuario + ' ' + self.producto.nombre + ' ' + str(self.cantidad) + ' ' + str(self.total) + ' ' + str(self.fecha_compra) + ' ' + self.direccion + ' ' + self.metodo_pago    
+
+class favoritos(models.Model):
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Productos, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.usuario + ' ' + self.producto.nombre
