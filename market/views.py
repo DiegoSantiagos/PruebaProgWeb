@@ -9,8 +9,6 @@ from django.db.models import Sum
 import logging
 logger = logging.getLogger(__name__)
 
-# Create your views here.
-
 def registro_usuario(request): 
     contexto = {}
     data = {
@@ -341,7 +339,7 @@ def realizarCompra(request):
                 totalPagar = sum(int(item.producto.precio) * item.cantidad for item in carrito)
                 for item in carrito:
                     compra = Compras(
-                        usuario=request.user,  # Asignar el usuario actual
+                        usuario=request.user, 
                         producto=item.producto,
                         cantidad=item.cantidad,
                         total=totalPagar,
@@ -419,27 +417,27 @@ def anadirProductoNoForm(request):
         nombre = request.POST.get('txtNombre').strip()
         precio = request.POST.get('txtPrecio').strip()
         descripcion = request.POST.get('txtDescripcion').strip()
-        categoria = Categoria.objects.get(pk='cmbCategoria')
+        categoria_id = request.POST.get('cmbCategoria') 
         foto = request.FILES.get('txtFoto')
-
+        
         if not nombre:
             context['error'] = 'El nombre es obligatorio'
         elif not precio or not precio.isdigit():
             context['error'] = 'El precio es obligatorio y debe ser un número'
         elif not descripcion:
             context['error'] = 'La descripción es obligatoria'
-        elif categoria == None:
+        elif not categoria_id:
             context['error'] = 'La categoría es obligatoria'
         else:
             try:
-                idCategoria = int(idCategoria)  # Convertir idCategoria a entero
-                categoria = Categoria.objects.get(pk=idCategoria)
+                categoria = Categoria.objects.get(pk=categoria_id) 
                 if txtId == '0':
                     producto = Productos(
                         nombre=nombre,
                         precio=precio,
                         descripcion=descripcion,
-                        Categoria=categoria
+                        Categoria=categoria,
+                        imagen = foto
                     )
                     if foto:
                         producto.imagen = foto
@@ -461,7 +459,10 @@ def anadirProductoNoForm(request):
                 context['error'] = 'El producto no existe'
             except Exception as e:
                 context['error'] = f'Error al crear/actualizar producto: {e}'
-
     context['listadoCategoria'] = Categoria.objects.all()
     context['MEDIA_URL'] = MEDIA_URL
     return render(request, 'anadirProductoNoForm.html', context)
+
+def modifocarProductoNoForm(request):
+    context = {}
+    

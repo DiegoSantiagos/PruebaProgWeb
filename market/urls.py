@@ -8,7 +8,7 @@ urlpatterns = [
     path('listarProductos', views.listarProductos, name='listarProductos'),
     path('listarCarrito', views.listarCarrito, name='listarCarrito'),
     path('listarCategoria', views.listarCategoria, name='listarCategoria'),
-    path('anadiProductoForm', views.anadirProductoForm, name='anadirProductoForm'),
+    path('anadirProductoForm', views.anadirProductoForm, name='anadirProductoForm'),
     path('anadirCategoriaForm', views.anadirCategoriaForm, name='anadirCategoriaForm'),
     path('anadirCarrito/<int:pk>', views.anadirCarrito, name='anadirCarrito'),
     # path('anadirCarrito/<int:pk>/<int:total>/', views.anadirCarrito, name='anadirCarrito'),
@@ -29,4 +29,5 @@ urlpatterns = [
     path('editarDireccion/<int:pk>', views.editarDireccion, name='editarDireccion'),
     path('eliminarDireccion/<int:pk>', views.eliminarDireccion, name='eliminarDireccion'),
     path('anadirProductoNoForm', views.anadirProductoNoForm, name='anadirProductoNoForm'),
+    
 ]
