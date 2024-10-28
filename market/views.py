@@ -108,8 +108,8 @@ def editarProducto(request, pk):
 @user_passes_test(is_superuser, login_url='/market/')
 def anadirProductoForm(request):
     context = {'form': ProductoForm()}
-    if request.method == 'POST':
-        if 'btnGuardar' in request.POST:
+    if 'btnGuardar' in request.POST:
+        if request.method == 'POST':
             item = None
             if request.POST['txtId'] != '0':
                 item = Productos.objects.get(pk=request.POST['txtId'])
